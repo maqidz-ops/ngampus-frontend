@@ -1,13 +1,20 @@
+import { Star } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 
 import { SectionHeading } from "@/components/sections/section-heading"
 import { Button } from "@/components/ui/button"
-import { Card } from "@/components/ui/card"
 import { marketplace } from "@/lib/content/home"
+import { marketplaceApps } from "@/lib/content/marketplace"
 import { cn } from "@/lib/utils"
 
+const previewSlugs = ["chatgpt", "claude", "gemini"]
+
 export function Marketplace() {
+  const items = previewSlugs
+    .map((slug) => marketplaceApps.find((app) => app.slug === slug))
+    .filter((app) => app !== undefined)
+
   return (
     <section
       id="marketplace"
@@ -18,41 +25,58 @@ export function Marketplace() {
         description={marketplace.description}
       />
       <div className="grid gap-6 md:grid-cols-3">
-        {marketplace.items.map((item) => (
-          <Card
-            key={item.name}
-            className="min-h-[300px] justify-between gap-10 rounded-2xl border border-line bg-white p-5 ring-0 lg:h-[360px]"
+        {items.map((app) => (
+          <article
+            key={app.slug}
+            className="flex flex-col gap-4 rounded-2xl border border-line bg-white p-5"
           >
-            <div className="flex h-12 items-center justify-between">
+            <div className="flex items-center gap-3">
               <Image
-                src={item.logo}
-                alt={`Logo ${item.name}`}
-                width={48}
-                height={48}
+                src={app.logo}
+                alt=""
+                width={56}
+                height={56}
                 className={cn(
-                  "size-12 rounded-xl object-cover",
-                  item.logoBordered && "border border-line"
+                  "size-14 rounded-xl object-cover",
+                  app.logoBordered && "border border-line"
                 )}
               />
-              <p className="text-lg font-semibold text-plum-700">
-                {item.price}
-              </p>
-            </div>
-            <div className="flex flex-col gap-4">
-              <div className="flex flex-col gap-2">
-                <h3 className="text-lg font-semibold">{item.name}</h3>
-                <p className="text-sm text-subtle">{item.description}</p>
+              <div className="flex min-w-0 flex-col gap-1">
+                <h3 className="text-base font-semibold tracking-[-0.02em]">
+                  {app.name}
+                </h3>
+                <p className="flex items-center gap-1.5 text-sm tracking-[-0.02em] text-subtle">
+                  <Star
+                    className="size-4 fill-primary text-primary"
+                    aria-hidden
+                  />
+                  <span className="text-black">5.0</span>
+                  <span>· Telah Terjual 599</span>
+                </p>
               </div>
-              <Button
-                asChild
-                className="h-11 w-full rounded-3xl px-4 text-sm font-medium"
-              >
-                <Link href={`/marketplace/${item.name.toLowerCase()}`}>
-                  {item.cta}
-                </Link>
-              </Button>
             </div>
-          </Card>
+            <div className="flex flex-col gap-2">
+              <p className="text-sm tracking-[-0.02em] text-subtle line-through">
+                {app.comparePrice}
+              </p>
+              <p className="text-2xl font-semibold tracking-[-0.02em]">
+                {app.price}
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {["Stok Tersedia", "Garansi"].map((badge) => (
+                  <span
+                    key={badge}
+                    className="rounded-full border border-line px-3 py-2 text-sm tracking-[-0.02em]"
+                  >
+                    {badge}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <Button asChild className="h-11 w-full rounded-3xl text-sm">
+              <Link href={`/marketplace/${app.slug}`}>{app.cta}</Link>
+            </Button>
+          </article>
         ))}
       </div>
     </section>

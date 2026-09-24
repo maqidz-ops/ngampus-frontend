@@ -82,32 +82,6 @@ export const marketplace = {
   title: "Beli Aplikasi Premium",
   description:
     "ChatGPT, Claude, dan Gemini. Langganan bulanan, harga mahasiswa.",
-  items: [
-    {
-      name: "ChatGPT",
-      description: "Asisten nulis, riset, dan brainstorm.",
-      price: "Rp 49.000/bln",
-      logo: "/images/app-chatgpt.png",
-      logoBordered: false,
-      cta: "Beli Sekarang",
-    },
-    {
-      name: "Claude",
-      description: "Baca dokumen panjang, analisis rapi.",
-      price: "Rp 59.000/bln",
-      logo: "/images/app-claude.png",
-      logoBordered: false,
-      cta: "Beli Sekarang",
-    },
-    {
-      name: "Gemini",
-      description: "Multimodal, nyambung ke Google.",
-      price: "Rp 78.000/bln",
-      logo: "/images/app-gemini.png",
-      logoBordered: false,
-      cta: "Beli Sekarang",
-    },
-  ],
 }
 
 export const pricing = {
