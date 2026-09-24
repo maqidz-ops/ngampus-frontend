@@ -1,11 +1,11 @@
 "use client"
 
 import {
-  Check,
   FileText,
   MessageCircle,
   Phone,
   QrCode,
+  TicketPercent,
   Upload,
 } from "lucide-react"
 import { useId, useState } from "react"
@@ -18,7 +18,6 @@ import {
   plagiarismFilters,
   plagiarismSteps,
 } from "@/lib/content/plagiarism"
-import { cn } from "@/lib/utils"
 
 function formatSize(bytes: number) {
   if (bytes < 1024 * 1024) return `${Math.max(bytes / 1024, 0.1).toFixed(1)} KB`
@@ -41,6 +40,10 @@ export function PlagiarismCheckout() {
     )
   )
   const [file, setFile] = useState<File | null>(null)
+  const [excludeAmount, setExcludeAmount] = useState("20")
+  const [excludeUnit, setExcludeUnit] = useState<"kata" | "persentase">(
+    "persentase"
+  )
 
   return (
     <>
@@ -71,23 +74,31 @@ export function PlagiarismCheckout() {
                 />
               </span>
             </label>
-            <label className="flex flex-col gap-2 text-sm font-medium tracking-[-0.02em]">
-              Kode Promo
+            <div className="flex flex-col gap-2 text-sm font-medium tracking-[-0.02em]">
+              <label htmlFor="promo">Kode Promo</label>
               <span className="relative">
-                <Phone
+                <TicketPercent
                   className="pointer-events-none absolute top-1/2 left-4 size-4 -translate-y-1/2 text-subtle"
                   aria-hidden
                 />
                 <input
+                  id="promo"
                   type="text"
                   name="promo"
                   value={promo}
                   onChange={(event) => setPromo(event.target.value)}
                   placeholder="Kode promo"
-                  className="h-12 w-full rounded-full border border-line bg-white pr-4 pl-11 text-sm tracking-[-0.02em] outline-none placeholder:text-subtle focus-visible:border-primary"
+                  className="h-12 w-full rounded-full border border-line bg-white pr-28 pl-11 text-sm tracking-[-0.02em] outline-none placeholder:text-subtle focus-visible:border-primary"
                 />
+                <Button
+                  type="button"
+                  size="pill"
+                  className="absolute top-1/2 right-1.5 h-9 -translate-y-1/2 px-3.5 text-sm"
+                >
+                  Gunakan
+                </Button>
               </span>
-            </label>
+            </div>
           </div>
 
           <fieldset className="flex flex-col gap-3">
@@ -104,7 +115,6 @@ export function PlagiarismCheckout() {
                   >
                     <input
                       type="checkbox"
-                      className="sr-only"
                       checked={isChecked}
                       onChange={() =>
                         setChecked((current) => ({
@@ -112,20 +122,8 @@ export function PlagiarismCheckout() {
                           [filter.id]: !current[filter.id],
                         }))
                       }
+                      className="mt-0.5 size-4 shrink-0 accent-primary"
                     />
-                    <span
-                      className={cn(
-                        "mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-md border",
-                        isChecked
-                          ? "border-primary bg-primary text-white"
-                          : "border-line bg-white"
-                      )}
-                      aria-hidden
-                    >
-                      {isChecked && (
-                        <Check className="size-3.5" strokeWidth={3} />
-                      )}
-                    </span>
                     <span className="flex flex-col gap-0.5">
                       <span className="text-sm font-semibold tracking-[-0.02em]">
                         {filter.title}
@@ -138,6 +136,51 @@ export function PlagiarismCheckout() {
                 )
               })}
             </div>
+            {checked["exclude-matches"] && (
+              <div className="flex flex-col gap-3 rounded-xl border border-line p-4">
+                <div className="flex flex-col gap-0.5">
+                  <p className="text-sm font-semibold tracking-[-0.02em]">
+                    Kecualikan Sumber yang Kurang Dari
+                  </p>
+                  <p className="text-xs leading-4 tracking-[-0.02em] text-subtle">
+                    Abaikan kecocokan di bawah batas minimum
+                  </p>
+                </div>
+                <div className="flex flex-wrap items-center gap-4">
+                  <input
+                    type="number"
+                    min={0}
+                    inputMode="numeric"
+                    value={excludeAmount}
+                    onChange={(event) => setExcludeAmount(event.target.value)}
+                    aria-label="Batas minimum"
+                    className="h-12 w-20 rounded-xl border border-line text-center text-base tracking-[-0.02em] outline-none focus-visible:border-primary"
+                  />
+                  <label className="flex items-center gap-2 text-sm tracking-[-0.02em]">
+                    <input
+                      type="radio"
+                      name="exclude-unit"
+                      value="kata"
+                      checked={excludeUnit === "kata"}
+                      onChange={() => setExcludeUnit("kata")}
+                      className="size-4 accent-primary"
+                    />
+                    Kata
+                  </label>
+                  <label className="flex items-center gap-2 text-sm tracking-[-0.02em]">
+                    <input
+                      type="radio"
+                      name="exclude-unit"
+                      value="persentase"
+                      checked={excludeUnit === "persentase"}
+                      onChange={() => setExcludeUnit("persentase")}
+                      className="size-4 accent-primary"
+                    />
+                    Persentase (%)
+                  </label>
+                </div>
+              </div>
+            )}
           </fieldset>
 
           <div className="flex flex-col gap-3">

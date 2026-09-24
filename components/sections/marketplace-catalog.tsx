@@ -1,5 +1,6 @@
 "use client"
 
+import { Star } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import { useMemo, useState } from "react"
@@ -34,7 +35,7 @@ export function MarketplaceCatalog() {
       <Breadcrumb
         items={[{ label: "Beranda", href: "/" }, { label: "Marketplace" }]}
       />
-      <section className="mx-auto flex w-full max-w-[1100px] flex-col gap-6 px-5 py-12 md:px-10 lg:py-16">
+      <section className="mx-auto flex w-full max-w-[1120px] flex-col gap-6 px-5 py-12 md:px-10 lg:py-16">
         <label className="sr-only" htmlFor="marketplace-search">
           Cari aplikasi
         </label>
@@ -72,40 +73,58 @@ export function MarketplaceCatalog() {
             Tidak ada aplikasi untuk pencarian ini.
           </p>
         ) : (
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {apps.map((app) => (
               <article
                 key={app.name}
-                className="flex min-h-[280px] flex-col justify-between rounded-2xl border border-line bg-white p-5"
+                className="flex flex-col gap-4 rounded-2xl border border-line bg-white p-5"
               >
-                <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
                   <Image
                     src={app.logo}
                     alt=""
-                    width={48}
-                    height={48}
+                    width={56}
+                    height={56}
                     className={cn(
-                      "size-12 rounded-xl object-cover",
+                      "size-14 rounded-xl object-cover",
                       app.logoBordered && "border border-line"
                     )}
                   />
-                  <p className="text-base font-semibold tracking-[-0.02em] text-plum-700">
-                    {app.price}
-                  </p>
-                </div>
-                <div className="flex flex-col gap-4">
-                  <div className="flex flex-col gap-1">
-                    <h2 className="text-lg font-semibold tracking-[-0.02em]">
+                  <div className="flex min-w-0 flex-col gap-1">
+                    <h2 className="text-base font-semibold tracking-[-0.02em]">
                       {app.name}
                     </h2>
-                    <p className="text-sm tracking-[-0.02em] text-subtle">
-                      {app.description}
+                    <p className="flex items-center gap-1.5 text-sm tracking-[-0.02em] text-subtle">
+                      <Star
+                        className="size-4 fill-primary text-primary"
+                        aria-hidden
+                      />
+                      <span className="text-black">5.0</span>
+                      <span>· Telah Terjual 599</span>
                     </p>
                   </div>
-                  <Button asChild size="pill" className="w-full">
-                    <Link href="/#harga">{app.cta}</Link>
-                  </Button>
                 </div>
+                <div className="flex flex-col gap-2">
+                  <p className="text-sm tracking-[-0.02em] text-subtle line-through">
+                    {app.comparePrice}
+                  </p>
+                  <p className="text-2xl font-semibold tracking-[-0.02em]">
+                    {app.price}
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {["Stok Tersedia", "Garansi"].map((badge) => (
+                      <span
+                        key={badge}
+                        className="rounded-full border border-line px-3 py-2 text-sm tracking-[-0.02em]"
+                      >
+                        {badge}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <Button asChild className="h-11 w-full rounded-3xl text-sm">
+                  <Link href={`/marketplace/${app.slug}`}>{app.cta}</Link>
+                </Button>
               </article>
             ))}
           </div>

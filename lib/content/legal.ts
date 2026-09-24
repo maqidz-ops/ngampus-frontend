@@ -4,8 +4,11 @@ export type LegalSection = {
   items?: string[]
 }
 
-export const legalIntro =
-  "Jawaban singkat soal Ngampus. Masih bingung? Chat admin kami."
+export const privacyIntro =
+  "Cara Ngampus menyimpan data akun, dokumen, dan pesananmu."
+
+export const termsIntro =
+  "Ketentuan pemesanan, pembayaran, dan pemakaian layanan Ngampus."
 
 export const termsSections: LegalSection[] = [
   {

@@ -47,7 +47,9 @@ export function Marketplace() {
                 asChild
                 className="h-11 w-full rounded-3xl px-4 text-sm font-medium"
               >
-                <Link href="/#harga">{item.cta}</Link>
+                <Link href={`/marketplace/${item.name.toLowerCase()}`}>
+                  {item.cta}
+                </Link>
               </Button>
             </div>
           </Card>

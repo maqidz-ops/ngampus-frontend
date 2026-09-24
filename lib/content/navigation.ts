@@ -55,8 +55,8 @@ export const footerColumns: { title: string; links: NavLink[] }[] = [
     title: "MENU",
     links: [
       { label: "Halaman Utama", href: "/" },
-      { label: "Riwayat Pesanan", href: "/#" },
-      { label: "Campaign", href: "/#" },
+      { label: "Riwayat Pesanan", href: "/riwayat-pesanan" },
+      { label: "UGC Campaign", href: "/ugc-campaign" },
       { label: "Blog & Berita", href: "/blog" },
       { label: "Syarat & Ketentuan", href: "/syarat-ketentuan" },
       { label: "Kebijakan Privasi", href: "/kebijakan-privasi" },
@@ -79,12 +79,12 @@ export const footerColumns: { title: string; links: NavLink[] }[] = [
         icon: "phone",
       },
       {
-        label: "support@ngampus.co.id",
-        href: "mailto:support@ngampus.co.id",
+        label: "cs@ngampus.co.id",
+        href: "mailto:cs@ngampus.co.id",
         icon: "email",
       },
-      { label: "TikTok", href: tiktokUrl, icon: "tiktok" },
-      { label: "Instagram", href: instagramUrl, icon: "instagram" },
+      { label: "@ngampus.co.id", href: tiktokUrl, icon: "tiktok" },
+      { label: "@ngampusapp", href: instagramUrl, icon: "instagram" },
     ],
   },
 ]

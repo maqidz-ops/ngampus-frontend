@@ -1,7 +1,7 @@
 export const plagiarismCheckout = {
-  priceLabel: "Rp 15.000",
+  priceLabel: "Rp0",
   summaryTitle: "Ringkasan Pesanan",
-  summaryDescription: "Cek similarity untuk satu dokumen.",
+  summaryDescription: "Cek plagiasi satu dokumen. Laporan masuk ke WhatsApp.",
   uploadTitle: "Upload Dokumen",
   uploadDescription: "PDF, DOCX, atau TXT.",
   emptyFile: "Belum ada dokumen",
@@ -26,9 +26,9 @@ export const plagiarismFilters = [
     defaultChecked: false,
   },
   {
-    id: "daftar-pustaka-2",
-    title: "Daftar Pustaka",
-    description: "Teks bagian referensi dan daftar pustaka",
+    id: "exclude-matches",
+    title: "Exclude Matches",
+    description: "Abaikan sumber dengan kemiripan kecil",
     defaultChecked: false,
   },
 ] as const

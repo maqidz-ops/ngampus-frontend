@@ -1,5 +1,5 @@
 export const hero = {
-  title: ["Dari tugas sampai skripsi,", "semua tools ada di sini."],
+  title: ["Partner Mahasiswa agar Lebih Mudah"],
   description:
     "Semua tools yang kamu butuh selama kuliah, kumpul di satu tempat. Dari AI, urusan akademik, sampai file.",
 }
@@ -88,7 +88,7 @@ export const marketplace = {
       description: "Asisten nulis, riset, dan brainstorm.",
       price: "Rp 49.000/bln",
       logo: "/images/app-chatgpt.png",
-      logoBordered: true,
+      logoBordered: false,
       cta: "Beli Sekarang",
     },
     {
@@ -102,9 +102,9 @@ export const marketplace = {
     {
       name: "Gemini",
       description: "Multimodal, nyambung ke Google.",
-      price: "Rp 45.000/bln",
+      price: "Rp 78.000/bln",
       logo: "/images/app-gemini.png",
-      logoBordered: true,
+      logoBordered: false,
       cta: "Beli Sekarang",
     },
   ],
@@ -141,6 +141,33 @@ export const pricing = {
         "Prioritas antrian",
         "Notifikasi WhatsApp",
       ],
+    },
+  ],
+}
+
+export const testimonials = {
+  title: "Kata mereka yang sudah pakai",
+  items: [
+    {
+      quote:
+        "Laporan masuk sebelum bimbingan selesai. Angkanya jelas, sumbernya juga kelihatan. Pas buat ngerapiin skripsi.",
+      name: "Nadia P.",
+      campus: "Universitas Gadjah Mada",
+      initials: "NP",
+    },
+    {
+      quote:
+        "Upload malam-malam, hasilnya sudah ada di WhatsApp. Gak perlu nunggu operator, dan filternya bantu bedain kutipan.",
+      name: "Reza M.",
+      campus: "Institut Teknologi Bandung",
+      initials: "RM",
+    },
+    {
+      quote:
+        "Sudah dipakai buat tugas dan artikel. Hasilnya konsisten, harganya juga masuk akal buat mahasiswa.",
+      name: "Sinta L.",
+      campus: "Universitas Airlangga",
+      initials: "SL",
     },
   ],
 }
@@ -185,5 +212,5 @@ export const cta = {
 
 export const footer = {
   description:
-    "Jasa cek plagiasi alternatif Turnitin dan AI Detector No Repository terpercaya, aman, dan aktif 24 jam. Proses otomatis dengan hasil cepat dan akurat.",
+    "Tools kuliah untuk tugas sampai skripsi. Cek plagiasi, akses AI, dan urusan file, siap kapan pun.",
 }

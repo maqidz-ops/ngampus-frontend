@@ -1,7 +1,6 @@
 import type { Metadata } from "next"
 import { Geist_Mono, Inter } from "next/font/google"
-import { Footer } from "@/components/layout/footer"
-import { Navbar } from "@/components/layout/navbar"
+import { SiteChrome } from "@/components/layout/site-chrome"
 import "./globals.css"
 
 const inter = Inter({
@@ -30,9 +29,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${inter.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
-        <Navbar />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <SiteChrome>{children}</SiteChrome>
       </body>
     </html>
   )

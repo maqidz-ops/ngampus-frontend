@@ -1,12 +1,14 @@
 import { Breadcrumb } from "@/components/layout/breadcrumb"
-import { legalIntro, type LegalSection } from "@/lib/content/legal"
+import { type LegalSection } from "@/lib/content/legal"
 
 export function LegalPage({
   title,
   sections,
+  description,
 }: {
   title: string
   sections: LegalSection[]
+  description: string
 }) {
   return (
     <>
@@ -16,7 +18,7 @@ export function LegalPage({
           <h1 className="text-[32px] leading-[1.2] font-medium tracking-[-0.02em] md:text-title">
             {title}
           </h1>
-          <p className="tracking-[-0.02em]">{legalIntro}</p>
+          <p className="tracking-[-0.02em]">{description}</p>
         </header>
         <div className="flex max-w-[860px] flex-col gap-8">
           {sections.map((section) => (

@@ -122,12 +122,21 @@ export function Navbar() {
             </NavigationMenuList>
           </NavigationMenu>
 
-          <Button
-            asChild
-            className="h-[42px] w-[120px] rounded-3xl text-lg font-medium tracking-[-0.02em]"
-          >
-            <Link href="/#harga">Daftar</Link>
-          </Button>
+          <div className="flex items-center gap-3">
+            <Button
+              asChild
+              variant="outline"
+              className="h-[42px] rounded-3xl px-5 text-lg font-medium tracking-[-0.02em]"
+            >
+              <Link href="/daftar">Daftar</Link>
+            </Button>
+            <Button
+              asChild
+              className="h-[42px] rounded-3xl px-5 text-lg font-medium tracking-[-0.02em]"
+            >
+              <Link href="/masuk">Masuk</Link>
+            </Button>
+          </div>
         </div>
 
         <MobileNav />
@@ -193,13 +202,22 @@ function MobileNav() {
             )}
           </Accordion>
         </nav>
-        <div className="border-t p-5">
+        <div className="flex flex-col gap-3 border-t p-5">
+          <SheetClose asChild>
+            <Button
+              asChild
+              variant="outline"
+              className="h-12 w-full rounded-3xl text-lg font-medium"
+            >
+              <Link href="/daftar">Daftar</Link>
+            </Button>
+          </SheetClose>
           <SheetClose asChild>
             <Button
               asChild
               className="h-12 w-full rounded-3xl text-lg font-medium"
             >
-              <Link href="/#harga">Daftar</Link>
+              <Link href="/masuk">Masuk</Link>
             </Button>
           </SheetClose>
         </div>
