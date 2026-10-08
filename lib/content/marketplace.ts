@@ -245,10 +245,40 @@ const warranty: CheckoutSection = {
   title: "Garansi",
   items: [
     {
-      body: "Produk ini dilengkapi dengan garansi selama durasi paket masih aktif. Jika terjadi kendala akses, tim Ngampus akan membantu pengecekan dan memberikan solusi sesuai kebijakan garansi yang berlaku.",
+      body: "Produk ini dilengkapi dengan garansi sesuai dengan durasi garansi yang tercantum pada masing-masing produk. Jika terjadi kendala akses selama masa garansi, tim NGAMPUS akan membantu melakukan pengecekan dan memberikan solusi sesuai kebijakan yang berlaku.",
     },
     {
-      body: "Solusi garansi dapat berupa perbaikan akses, penggantian akun, penggantian akses, atau refund apabila kendala tidak dapat diselesaikan berdasarkan hasil pengecekan tim Ngampus.",
+      body: "Solusi garansi dapat berupa perbaikan akses, penggantian akun, penggantian akses, atau refund apabila kendala tidak dapat diselesaikan berdasarkan hasil pengecekan tim NGAMPUS.",
+    },
+  ],
+}
+
+const warrantyTerms: CheckoutSection = {
+  title: "Syarat & Ketentuan",
+  items: [
+    {
+      body: "Durasi garansi mengikuti waktu yang tercantum pada masing-masing produk.",
+    },
+    {
+      body: "Garansi mencakup kendala akses atau layanan yang berasal dari produk yang dibeli.",
+    },
+    {
+      body: "Pelanggan wajib mengikuti panduan dan ketentuan penggunaan yang diberikan NGAMPUS.",
+    },
+    {
+      body: "Garansi tidak berlaku jika pelanggan membagikan akun, mengubah data akun tanpa izin, atau menggunakan layanan di luar ketentuan produk.",
+    },
+    {
+      body: "Pengajuan garansi wajib disertai bukti kendala yang diperlukan untuk proses pengecekan.",
+    },
+    {
+      body: "Penyelesaian dapat berupa perbaikan akses, penggantian akun, penggantian akses, atau refund sesuai hasil pengecekan.",
+    },
+    {
+      body: "Jika refund menjadi solusi terakhir, nominal refund dihitung berdasarkan: Harga × (Durasi Tersisa ÷ Durasi Garansi) × 20%.",
+    },
+    {
+      body: "Keputusan akhir terkait garansi ditentukan oleh tim NGAMPUS berdasarkan hasil pengecekan dan kebijakan yang berlaku.",
     },
   ],
 }
@@ -698,6 +728,7 @@ export function getMarketplaceCheckout(slug: string) {
           }
         : descriptionSection(app.name, app.price),
       warranty,
+      warrantyTerms,
     ],
   } satisfies MarketplaceCheckout
 }
