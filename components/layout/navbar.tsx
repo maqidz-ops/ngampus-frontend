@@ -35,7 +35,7 @@ import {
 import { mainNav, type NavLink } from "@/lib/content/navigation"
 
 const navItemClass =
-  "h-auto rounded-md bg-transparent px-0 py-1 text-base font-normal text-black hover:bg-transparent hover:text-primary focus:bg-transparent data-open:bg-transparent data-open:hover:bg-transparent data-open:focus:bg-transparent"
+  "h-auto rounded-md bg-transparent px-0 py-1 text-base font-normal whitespace-nowrap text-black hover:bg-transparent hover:text-primary focus:bg-transparent data-open:bg-transparent data-open:hover:bg-transparent data-open:focus:bg-transparent"
 
 const toolIcons: Record<NonNullable<NavLink["tool"]>, LucideIcon> = {
   merge: Combine,
@@ -74,7 +74,7 @@ export function Navbar() {
       <div className="mx-auto flex h-17 max-w-[1280px] items-center justify-between px-5 md:px-10">
         <Logo />
 
-        <div className="hidden items-center gap-6 lg:flex">
+        <div className="hidden items-center gap-6 xl:flex">
           <NavigationMenu viewport={false}>
             <NavigationMenuList className="gap-6">
               {mainNav.map((item) =>
@@ -152,7 +152,7 @@ function MobileNav() {
         <Button
           variant="ghost"
           size="icon-lg"
-          className="lg:hidden"
+          className="xl:hidden"
           aria-label="Buka menu"
         >
           <MenuIcon className="size-6" />

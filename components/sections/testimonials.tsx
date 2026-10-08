@@ -1,10 +1,12 @@
 import { Star } from "lucide-react"
 
+import { TrustedBy } from "@/components/sections/trusted-by"
 import { testimonials } from "@/lib/content/home"
 
 export function Testimonials() {
   return (
     <section className="bg-surface">
+      <TrustedBy />
       <div className="mx-auto flex w-full max-w-[1280px] flex-col gap-10 px-5 py-16 md:px-10 lg:gap-12 lg:py-25">
         <h2 className="max-w-[640px] text-[32px] leading-[1.2] font-semibold tracking-[-0.02em] text-black md:text-[40px]">
           {testimonials.title}

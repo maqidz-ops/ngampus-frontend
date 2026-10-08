@@ -25,12 +25,12 @@ export function Cta() {
           </Button>
         </div>
         <Image
-          src="/images/mascot.png"
+          src="/images/mascot-happy.png"
           alt=""
-          width={1024}
-          height={1536}
+          width={593}
+          height={880}
           sizes="320px"
-          className="mx-auto mt-6 -mb-20 h-[360px] w-[240px] object-cover lg:absolute lg:top-8 lg:left-[742px] lg:m-0 lg:h-[480px] lg:w-[320px]"
+          className="mx-auto mt-6 -mb-20 h-[360px] w-[240px] object-contain lg:absolute lg:top-8 lg:left-[742px] lg:m-0 lg:h-[480px] lg:w-[320px]"
         />
       </div>
     </section>

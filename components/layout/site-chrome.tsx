@@ -10,7 +10,7 @@ const bareRoutes = new Set(["/daftar", "/masuk", "/lupa-password"])
 export function SiteChrome({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
 
-  if (bareRoutes.has(pathname)) {
+  if (bareRoutes.has(pathname) || pathname.startsWith("/creator")) {
     return <main className="flex-1">{children}</main>
   }
 

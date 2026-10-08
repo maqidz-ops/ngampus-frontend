@@ -11,8 +11,8 @@ export type NavItem =
   | { type: "menu"; label: string; items: NavLink[] }
 
 export const mainNav: NavItem[] = [
-  { type: "link", label: "Marketplace", href: "/marketplace" },
-  { type: "link", label: "Cek Plagiarisme", href: "/cek-plagiarisme" },
+  { type: "link", label: "Marketplace Account", href: "/marketplace" },
+  { type: "link", label: "Plagiarisme Checker", href: "/cek-plagiarisme" },
   {
     type: "menu",
     label: "File Tools",
@@ -37,9 +37,8 @@ export const mainNav: NavItem[] = [
       },
     ],
   },
-  { type: "link", label: "Harga", href: "/#harga" },
-  { type: "link", label: "Blog", href: "/blog" },
-  { type: "link", label: "Kontak Kami", href: "/#kontak" },
+  { type: "link", label: "Riwayat Pesanan", href: "/riwayat-pesanan" },
+  { type: "link", label: "Ngampus Creator", href: "/creator" },
 ]
 
 export const whatsappChannelUrl =
@@ -56,7 +55,7 @@ export const footerColumns: { title: string; links: NavLink[] }[] = [
     links: [
       { label: "Halaman Utama", href: "/" },
       { label: "Riwayat Pesanan", href: "/riwayat-pesanan" },
-      { label: "UGC Campaign", href: "/ugc-campaign" },
+      { label: "Ngampus Creator", href: "/creator" },
       { label: "Blog & Berita", href: "/blog" },
       { label: "Syarat & Ketentuan", href: "/syarat-ketentuan" },
       { label: "Kebijakan Privasi", href: "/kebijakan-privasi" },
@@ -65,9 +64,9 @@ export const footerColumns: { title: string; links: NavLink[] }[] = [
   {
     title: "LAYANAN",
     links: [
-      { label: "Akses AI populer", href: "/marketplace" },
-      { label: "Cek Plagiarisme", href: "/cek-plagiarisme" },
-      { label: "File tools", href: "/file-tools" },
+      { label: "Marketplace Account", href: "/marketplace" },
+      { label: "Plagiarisme Checker", href: "/cek-plagiarisme" },
+      { label: "File Tools", href: "/file-tools" },
     ],
   },
   {

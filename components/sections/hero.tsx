@@ -19,13 +19,13 @@ export function Hero() {
       </div>
 
       <Image
-        src="/images/mascot.png"
+        src="/images/mascot-hero.png"
         alt="Maskot Ngampus"
-        width={1024}
-        height={1536}
+        width={660}
+        height={861}
         priority
-        sizes="280px"
-        className="h-auto w-[200px] shrink-0 object-cover sm:w-[240px] lg:h-[420px] lg:w-[280px]"
+        sizes="320px"
+        className="h-[280px] w-auto shrink-0 object-contain sm:h-[340px] lg:h-[420px]"
       />
     </section>
   )

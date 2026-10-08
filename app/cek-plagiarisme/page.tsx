@@ -1,13 +1,13 @@
 import type { Metadata } from "next"
 
-import { PlagiarismCheckout } from "@/components/sections/plagiarism-checkout"
+import { PlagiarismServices } from "@/components/sections/plagiarism-services"
 
 export const metadata: Metadata = {
-  title: "Cek Plagiarisme",
+  title: "Plagiarisme Checker",
   description:
-    "Unggah dokumen, bayar, dan terima laporan cek plagiasi di WhatsApp.",
+    "Cek similarity Turnitin, deteksi tulisan AI, atau parafrase manual.",
 }
 
 export default function PlagiarismPage() {
-  return <PlagiarismCheckout />
+  return <PlagiarismServices />
 }

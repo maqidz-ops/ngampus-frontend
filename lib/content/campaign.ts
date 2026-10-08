@@ -1,3 +1,26 @@
+export const creatorJoinSteps = [
+  {
+    title: "Daftarkan Dirimu",
+    body: "Isi data pendaftaran dengan lengkap dan pastikan informasi yang kamu masukkan valid, ya!",
+  },
+  {
+    title: "Pahami Ketentuannya",
+    body: "Sebelum mulai bikin konten, baca dulu ketentuan dan panduan Ngampus Creator yang tersedia di website",
+  },
+  {
+    title: "Buat, Pantau, & Submit",
+    body: "Buat konten sesuai ketentuan, pantau performanya, lalu submit kontenmu melalui website Ngampus",
+  },
+  {
+    title: "Tunggu Verifikasi",
+    body: "Setelah disubmit, kontenmu akan kami cek dan verifikasi terlebih dahulu.",
+  },
+  {
+    title: "Dapatkan Reward & Withdraw",
+    body: "Kalau kontenmu sudah dinyatakan valid, reward akan masuk ke akunmu. Setelah itu, kamu bisa withdraw kapan pun kamu mau!",
+  },
+]
+
 export const campaignPlatforms = [
   {
     icon: "instagram" as const,

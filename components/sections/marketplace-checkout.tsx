@@ -59,19 +59,37 @@ export function MarketplaceCheckout({
 }: {
   product: MarketplaceCheckout
 }) {
+  const offers = product.offers
   const [name, setName] = useState("")
   const [whatsapp, setWhatsapp] = useState("")
   const [packageName, setPackageName] = useState(product.packages[0])
   const [accountType, setAccountType] = useState(checkoutTypes[0])
-  const [durationId, setDurationId] = useState(checkoutDurations[0].id)
+  const [durationId, setDurationId] = useState(
+    offers?.find((offer) => offer.plan === product.packages[0])?.duration ??
+      checkoutDurations[0].id
+  )
   const [payNote, setPayNote] = useState("")
 
+  const planOffers = offers?.filter((offer) => offer.plan === packageName)
+  const selectedOffer =
+    planOffers?.find((offer) => offer.duration === durationId) ??
+    planOffers?.[0]
   const duration =
     checkoutDurations.find((item) => item.id === durationId) ??
     checkoutDurations[0]
-  const total = product.monthly * duration.months
-  const official = product.compare * duration.months
+  const total = selectedOffer
+    ? selectedOffer.price
+    : product.monthly * duration.months
+  const official = selectedOffer
+    ? selectedOffer.official
+    : product.compare * duration.months
   const savings = official - total
+
+  function selectPlan(plan: string) {
+    setPackageName(plan)
+    const next = offers?.find((offer) => offer.plan === plan)
+    if (next) setDurationId(next.duration)
+  }
 
   return (
     <>
@@ -207,39 +225,58 @@ export function MarketplaceCheckout({
                     key={item}
                     selected={item === packageName}
                     label={item}
-                    onSelect={() => setPackageName(item)}
+                    onSelect={() => selectPlan(item)}
                   />
                 ))}
               </div>
             </fieldset>
-            <fieldset className="flex flex-col gap-2">
-              <legend className="mb-2 text-sm tracking-[-0.02em]">Tipe</legend>
-              <div className="flex flex-wrap gap-2" role="radiogroup">
-                {checkoutTypes.map((item) => (
-                  <Choice
-                    key={item}
-                    selected={item === accountType}
-                    label={item}
-                    onSelect={() => setAccountType(item)}
-                  />
-                ))}
-              </div>
-            </fieldset>
+            {!offers && (
+              <fieldset className="flex flex-col gap-2">
+                <legend className="mb-2 text-sm tracking-[-0.02em]">
+                  Tipe
+                </legend>
+                <div className="flex flex-wrap gap-2" role="radiogroup">
+                  {checkoutTypes.map((item) => (
+                    <Choice
+                      key={item}
+                      selected={item === accountType}
+                      label={item}
+                      onSelect={() => setAccountType(item)}
+                    />
+                  ))}
+                </div>
+              </fieldset>
+            )}
             <fieldset className="flex flex-col gap-2">
               <legend className="mb-2 text-sm tracking-[-0.02em]">
                 Durasi
               </legend>
-              <div className="grid grid-cols-3 gap-2" role="radiogroup">
-                {checkoutDurations.map((item) => (
-                  <Choice
-                    key={item.id}
-                    selected={item.id === durationId}
-                    label={item.label}
-                    detail={rupiah(product.monthly * item.months)}
-                    onSelect={() => setDurationId(item.id)}
-                  />
-                ))}
+              <div className="flex flex-wrap gap-2" role="radiogroup">
+                {planOffers
+                  ? planOffers.map((item) => (
+                      <Choice
+                        key={item.duration}
+                        selected={item.duration === selectedOffer?.duration}
+                        label={item.duration}
+                        detail={rupiah(item.price)}
+                        onSelect={() => setDurationId(item.duration)}
+                      />
+                    ))
+                  : checkoutDurations.map((item) => (
+                      <Choice
+                        key={item.id}
+                        selected={item.id === durationId}
+                        label={item.label}
+                        detail={rupiah(product.monthly * item.months)}
+                        onSelect={() => setDurationId(item.id)}
+                      />
+                    ))}
               </div>
+              {selectedOffer && (
+                <p className="text-sm tracking-[-0.02em] text-subtle">
+                  Garansi {selectedOffer.warranty}
+                </p>
+              )}
             </fieldset>
           </section>
 

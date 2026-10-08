@@ -1,40 +1,86 @@
 export const hero = {
-  title: ["Partner Mahasiswa agar Lebih Mudah"],
+  title: ["Kuliah Ribet?", "Ngampus Aja"],
   description:
-    "Semua tools yang kamu butuh selama kuliah, kumpul di satu tempat. Dari AI, urusan akademik, sampai file.",
+    "Teman kuliahmu untuk berbagai kebutuhan dari Marketplace Account, Plagiarisme Checker, sampai Academic Tools",
 }
 
 export const trustedBy = {
   title: "TELAH DIPERCAYA 50.000+ MAHASISWA",
-  logos: Array.from({ length: 10 }, (_, i) => ({
-    id: `campus-${i}`,
-    name: "Universitas Sebelas Maret",
-    src: "/images/logo-campus.png",
-  })),
+  logos: [
+    {
+      id: "uns",
+      name: "Universitas Sebelas Maret",
+      src: "/images/logo-campus.png",
+      width: 1024,
+      height: 386,
+    },
+    {
+      id: "pertamina",
+      name: "Universitas Pertamina",
+      src: "/images/logo-pertamina.png",
+      width: 742,
+      height: 537,
+    },
+    {
+      id: "telkom",
+      name: "Telkom University",
+      src: "/images/logo-telkom.png",
+      width: 416,
+      height: 568,
+    },
+    {
+      id: "tidar",
+      name: "Universitas Tidar",
+      src: "/images/logo-tidar.png",
+      width: 1017,
+      height: 1024,
+    },
+    {
+      id: "dinamika",
+      name: "Universitas Dinamika",
+      src: "/images/logo-dinamika.png",
+      width: 876,
+      height: 241,
+    },
+    {
+      id: "untar",
+      name: "Universitas Tarumanagara",
+      src: "/images/logo-untar.png",
+      width: 471,
+      height: 588,
+    },
+    {
+      id: "amikom",
+      name: "Universitas AMIKOM Yogyakarta",
+      src: "/images/logo-amikom.png",
+      width: 1024,
+      height: 372,
+    },
+  ],
 }
 
 export const toolCategories = {
-  title: ["Tools kuliah,", "lengkap di satu tempat"],
+  title: ["Kebutuhan mahasiswa,", "lengkap di satu tempat"],
   description:
-    "Ngampus.id bantu dari tugas, skripsi, tesis, sampai artikel ilmiah — cek plagiasi, AI, dan urusan file.",
+    "Dari tugas, skripsi, sampai artikel ilmiah bahkan butuh refreshing? Ngampus bantu kamu beresin berbagai urusan yang sering bikin kuliah makin ribet.",
   items: [
     {
-      title: "Akses AI populer",
+      title: "Marketplace Account",
       description:
-        "ChatGPT, Claude, Gemini, Canva, dan tools favorit mahasiswa lainnya.",
+        "Akses berbagai akun digital favoritmu, dari AI dan desain sampai hiburan.",
       href: "/marketplace",
       cta: "Beli Sekarang",
     },
     {
-      title: "Cek Plagiarisme",
+      title: "Plagiarisme Checker",
       description:
-        "Cek plagiasi, deteksi AI, parafrase, grammar, dan kebutuhan akademik lain.",
+        "Cek Turnitin dan AI, atau gunakan jasa parafrase untuk membantu menyempurnakan tulisanmu.",
       href: "/cek-plagiarisme",
       cta: "Cek Sekarang",
     },
     {
       title: "File tools",
-      description: "Kompres, convert, gabung, dan rapikan file. Gratis.",
+      description: "Gabungkan, kompres, dan ubah format file dengan mudah dan gratis!",
       href: "/file-tools",
       cta: "Coba Sekarang",
     },
@@ -42,85 +88,43 @@ export const toolCategories = {
 }
 
 export const whyNgampus = {
-  title: "Kenapa mahasiswa pilih Ngampus",
-  description: "Cek plagiasi resmi, hasil cepat, dokumenmu tetap aman.",
+  title: "Kenapa harus Ngampus?",
   items: [
     {
-      title: "Platform resmi",
+      title: "Harga Bersahabat",
       description:
-        "Cek plagiasi pakai platform yang kredibel dan sudah dipakai luas di kampus.",
+        "Dapatkan kebutuhan digital dan akademik tanpa bikin kantong mahasiswa jebol.",
     },
     {
-      title: "Akses 24 jam",
+      title: "Proses Cepat",
       description:
-        "Siap kapan pun. Tengah malam atau mepet deadline, langsung bisa jalan.",
+        "Proses cepat dan praktis, supaya kamu bisa lanjut ngerjain tugas tanpa banyak menunggu.",
     },
     {
-      title: "Selesai dalam menit",
+      title: "Terpercaya & Bergaransi",
       description:
-        "Gak perlu nunggu lama. Dokumen diproses otomatis, hasilnya dalam hitungan menit.",
+        "Produk dan layanan yang jelas, dengan garansi untuk memberi kamu rasa aman saat menggunakan Ngampus.",
     },
     {
-      title: "Privasi terjaga",
+      title: "Akses 24 Jam",
       description:
-        "File tidak disimpan permanen. Data dihapus otomatis setelah proses selesai.",
+        "Akses layanan Ngampus kapan saja, termasuk saat deadline mulai mendekat.",
     },
     {
-      title: "Tidak masuk repository",
+      title: "Privasi Terjaga",
       description:
-        "Dokumenmu tidak masuk repository permanen, jadi tidak mengganggu cek plagiasi kampus nanti.",
+        "Kami menjaga privasi dokumen dan data kamu selama menggunakan layanan Ngampus.",
     },
     {
-      title: "Laporan lengkap",
+      title: "Lengkap dalam satu tempat",
       description:
-        "Dapat laporan PDF dengan persentase similarity dan sumber yang terdeteksi, rinci.",
-    },
-  ],
-}
-
-export const marketplace = {
-  title: "Beli Aplikasi Premium",
-  description:
-    "ChatGPT, Claude, dan Gemini. Langganan bulanan, harga mahasiswa.",
-}
-
-export const pricing = {
-  title: "Paket langganan",
-  description:
-    "Akses cek plagiasi dan tools akademik, dengan harga yang masuk akal.",
-  cta: "Pilih paket",
-  plans: [
-    {
-      name: "Starter",
-      price: "Rp 24.000",
-      description: "Coba dulu. Pas untuk tugas singkat.",
-      features: ["3x cek plagiasi", "Laporan hasil PDF", "Notifikasi WhatsApp"],
-    },
-    {
-      name: "Standar",
-      price: "Rp 24.000",
-      description: "Paling dipilih. Pas buat skripsi.",
-      features: [
-        "10x cek plagiasi",
-        "Prioritas antrian",
-        "Notifikasi WhatsApp",
-      ],
-    },
-    {
-      name: "Premium",
-      price: "Rp 24.000",
-      description: "Kuota lebih besar, prioritas lebih tinggi.",
-      features: [
-        "25x cek plagiasi",
-        "Prioritas antrian",
-        "Notifikasi WhatsApp",
-      ],
+        "Dari butuh akun premium, mau cek plagiarisme, sampai otak atik file secara gratis, berbagai kebutuhanmu ada di satu tempat."
     },
   ],
 }
 
 export const testimonials = {
-  title: "Kata mereka yang sudah pakai",
+  title: "Apa Kata Mereka?",
   items: [
     {
       quote:
@@ -151,37 +155,62 @@ export const faq = {
   description: "Jawaban singkat soal Ngampus. Masih bingung? Chat admin kami.",
   items: [
     {
-      question: "Apa itu Ngampus?",
+      question: "Apakah akun yang dibeli aman?",
       answer:
-        "Ngampus adalah platform AI untuk penulisan akademik. Dari parafrase, rapikan teks AI, cek plagiasi, sampai persiapan publikasi jurnal — semua di satu tempat.",
+        "Akun dapat digunakan dengan aman dan dilengkapi garansi sesuai ketentuan masing-masing produk. Pastikan cek detail produk sebelum melakukan pembelian.",
     },
     {
-      question: "Siapa yang cocok memakai Ngampus?",
+      question: "Bagaimana sistem garansi akun di Ngampus?",
       answer:
-        "Mahasiswa D3, S1, S2, sampai S3 yang sedang mengerjakan tugas, skripsi, tesis, disertasi, atau artikel ilmiah.",
+        "Jika akun mengalami kendala, ajukan klaim melalui fitur Claim Garansi dengan melampirkan bukti pembelian. Jika kendala masih terjadi, kamu bisa menghubungi CS Ngampus melalui kontak yang tersedia.",
     },
     {
-      question: "Fitur apa saja yang tersedia di Ngampus?",
+      question: "Berapa lama akun diproses?",
       answer:
-        "Cek plagiasi, deteksi AI, parafrase, grammar checker, akses aplikasi AI premium, serta file tools seperti kompres, convert, gabung, dan split file.",
+        "Pesanan biasanya diproses dalam hitungan menit, dengan waktu maksimal 3 jam setelah pembayaran berhasil.",
     },
     {
-      question: "Bagaimana cara memakai Ngampus?",
+      question: "Apakah akun bisa digunakan di perangkat sendiri?",
       answer:
-        "Daftar akun, pilih layanan atau paket yang kamu butuhkan, unggah dokumen, lalu tunggu hasilnya. Notifikasi dikirim lewat WhatsApp.",
+        "Bisa. Setelah pembayaran berhasil, kamu akan mendapatkan detail login untuk mengakses akun sesuai ketentuan produk.",
     },
     {
-      question: "Berapa lama prosesnya?",
+      question: "Bagaimana cara melakukan cek plagiarisme?",
       answer:
-        "Sebagian besar dokumen selesai diproses dalam hitungan menit, tergantung panjang dokumen dan antrian.",
+        "Pilih layanan yang kamu butuhkan, upload dokumen sesuai ketentuan, lakukan pembayaran, lalu tunggu hingga proses pengecekan selesai.",
+    },
+    {
+      question: "Apakah hasil Turnitin di Ngampus sama dengan Turnitin kampus?",
+      answer:
+        "Pengecekan dilakukan menggunakan Turnitin, sehingga hasil similarity berasal dari sistem Turnitin. Hasil dapat berbeda jika terdapat perbedaan database atau pengaturan pengecekan.",
+    },
+    {
+      question: "Apakah dokumen saya aman setelah melakukan pengecekan?",
+      answer:
+        "Tentu. Dokumen hanya digunakan untuk proses pengecekan dan tidak disimpan secara permanen setelah proses selesai.",
+    },
+    {
+      question: "Apa perbedaan Turnitin Check, AI Check, dan Jasa Parafrase?",
+      answer:
+        "Turnitin Check untuk melihat similarity, AI Check untuk mengecek indikasi tulisan AI, sedangkan Jasa Parafrase membantu menyusun ulang tulisan untuk mengurangi similarity.",
+    },
+    {
+      question: "Bagaimana jika proses pengecekan saya gagal?",
+      answer:
+        "Tenang, pengecekan dapat dilakukan kembali sesuai ketentuan layanan, misalnya jika terdapat masalah pada format atau ketentuan file. Jika masih gagal, kamu bisa menghubungi CS Ngampus untuk mendapatkan bantuan.",
+    },
+    {
+      question: "Apa saja yang tersedia di Ngampus?",
+      answer:
+        "Ngampus menyediakan Marketplace Account, Plagiarisme Checker, dan Academic Tools dalam satu platform untuk berbagai kebutuhan mahasiswa.",
     },
   ],
 }
 
 export const cta = {
-  title: ["Cek plagiasimu,", "hasil dalam menit."],
-  button: "Mulai sekarang",
-  href: "/#harga",
+  title: ["Siap Bikin Kuliahmu", "Lebih Gampang?"],
+  button: "Yuk, Coba Ngampus",
+  href: "/marketplace",
 }
 
 export const footer = {

@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils"
 
 type SectionHeadingProps = {
   title: string | string[]
-  description: string
+  description?: string
   align?: "left" | "center"
   className?: string
 }
@@ -30,7 +30,9 @@ export function SectionHeading({
           </span>
         ))}
       </h2>
-      <p className="tracking-[-0.02em]">{description}</p>
+      {description ? (
+        <p className="tracking-[-0.02em]">{description}</p>
+      ) : null}
     </div>
   )
 }

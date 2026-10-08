@@ -4,7 +4,7 @@ import { trustedBy } from "@/lib/content/home"
 
 export function TrustedBy() {
   // The marquee shifts by -50%, so each half must be wider than the widest viewport.
-  const logos = Array.from({ length: 4 }, () => trustedBy.logos).flat()
+  const logos = Array.from({ length: 6 }, () => trustedBy.logos).flat()
 
   return (
     <section className="flex flex-col items-center gap-6 overflow-hidden py-4">
@@ -22,9 +22,9 @@ export function TrustedBy() {
               <Image
                 src={logo.src}
                 alt={logo.name}
-                width={1024}
-                height={386}
-                className="h-[45px] w-[120px] object-cover"
+                width={logo.width}
+                height={logo.height}
+                className="h-12 w-auto object-contain grayscale"
               />
             </li>
           ))}

@@ -1,7 +1,7 @@
 import { Mail, Phone } from "lucide-react"
-import Image from "next/image"
 import Link from "next/link"
 
+import { Logo } from "@/components/layout/logo"
 import { footer } from "@/lib/content/home"
 import { footerColumns, type NavLink } from "@/lib/content/navigation"
 
@@ -53,18 +53,17 @@ export function Footer() {
       <div className="mx-auto flex max-w-[1280px] flex-col px-5 py-15 md:px-10">
         <div className="flex flex-col gap-10 lg:flex-row lg:justify-between">
           <div className="flex max-w-[400px] flex-col gap-10">
-            <Link href="/" aria-label="Ngampus.id beranda">
-              <Image
-                src="/images/logo-text-orange.png"
-                alt="ngampus.id"
-                width={1068}
-                height={225}
-                className="h-[38px] w-[180px]"
-              />
-            </Link>
-            <p className="tracking-[-0.02em] text-black">
-              {footer.description}
-            </p>
+            <Logo className="h-12" />
+            <div className="flex flex-col gap-4">
+              <p className="tracking-[-0.02em] text-black">
+                {footer.description}
+              </p>
+              <p className="text-sm tracking-[-0.02em] text-black/70">
+                Copyright 2026 © Ngampus.
+                <br />
+                All Rights Reserved
+              </p>
+            </div>
           </div>
 
           <div className="grid grid-cols-2 gap-10 sm:grid-cols-3 lg:gap-15">

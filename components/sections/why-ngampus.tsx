@@ -1,10 +1,10 @@
 import {
   BadgeCheck,
   Clock,
-  FileText,
-  FolderX,
+  Layers,
   Lock,
   Timer,
+  Wallet,
   type LucideIcon,
 } from "lucide-react"
 
@@ -13,12 +13,12 @@ import { Card } from "@/components/ui/card"
 import { whyNgampus } from "@/lib/content/home"
 
 const benefitIcons: Record<string, LucideIcon> = {
-  "Platform resmi": BadgeCheck,
-  "Akses 24 jam": Clock,
-  "Selesai dalam menit": Timer,
-  "Privasi terjaga": Lock,
-  "Tidak masuk repository": FolderX,
-  "Laporan lengkap": FileText,
+  "Harga Bersahabat": Wallet,
+  "Proses Cepat": Timer,
+  "Terpercaya & Bergaransi": BadgeCheck,
+  "Akses 24 Jam": Clock,
+  "Privasi Terjaga": Lock,
+  "Lengkap dalam satu tempat": Layers,
 }
 
 export function WhyNgampus() {

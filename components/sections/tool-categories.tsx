@@ -1,4 +1,4 @@
-import { Files, GraduationCap, Sparkles, type LucideIcon } from "lucide-react"
+import Image from "next/image"
 import Link from "next/link"
 
 import { SectionHeading } from "@/components/sections/section-heading"
@@ -6,11 +6,24 @@ import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { toolCategories } from "@/lib/content/home"
 
-const categoryIcons: Record<string, LucideIcon> = {
-  "Akses AI populer": Sparkles,
-  "Cek Plagiarisme": GraduationCap,
-  "File tools": Files,
-}
+const categoryMascots: Record<string, { src: string; width: number; height: number }> =
+  {
+    "Marketplace Account": {
+      src: "/images/mascot-marketplace.png",
+      width: 677,
+      height: 901,
+    },
+    "Plagiarisme Checker": {
+      src: "/images/mascot-academic.png",
+      width: 667,
+      height: 955,
+    },
+    "File tools": {
+      src: "/images/mascot-file-tools.png",
+      width: 664,
+      height: 866,
+    },
+  }
 
 export function ToolCategories() {
   return (
@@ -22,20 +35,22 @@ export function ToolCategories() {
         title={toolCategories.title}
         description={toolCategories.description}
       />
-      <div className="grid gap-4 md:grid-cols-3">
+      <div className="grid items-stretch gap-4 md:grid-cols-3">
         {toolCategories.items.map((item) => {
-          const Icon = categoryIcons[item.title]
+          const mascot = categoryMascots[item.title]
           return (
             <Card
               key={item.title}
-              className="min-h-[300px] justify-between gap-10 rounded-2xl bg-surface p-6 text-base ring-0 lg:h-[360px]"
+              className="justify-between gap-6 rounded-2xl bg-surface p-6 text-base ring-0"
             >
-              <div
-                className="flex size-15 items-center justify-center rounded-xl bg-white"
-                aria-hidden
-              >
-                <Icon className="size-7 text-primary" strokeWidth={1.75} />
-              </div>
+              <Image
+                src={mascot.src}
+                alt=""
+                width={mascot.width}
+                height={mascot.height}
+                sizes="220px"
+                className="mx-auto h-44 w-auto object-contain"
+              />
               <div className="flex flex-col items-start gap-[21px]">
                 <div className="flex flex-col gap-3">
                   <h3 className="text-[22px] font-semibold tracking-[-0.02em]">

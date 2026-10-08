@@ -1,17 +1,25 @@
 import { ChevronLeft } from "lucide-react"
 import Link from "next/link"
 
-export function AuthShell({ children }: { children: React.ReactNode }) {
+export function AuthShell({
+  children,
+  backHref = "/",
+  backLabel = "Kembali ke Beranda",
+}: {
+  children: React.ReactNode
+  backHref?: string
+  backLabel?: string
+}) {
   return (
     <div className="flex min-h-svh flex-col bg-white">
       <div className="border-b border-line">
         <div className="mx-auto flex h-[60px] w-full max-w-[1280px] items-center px-5 md:px-10">
           <Link
-            href="/"
+            href={backHref}
             className="inline-flex items-center gap-2 text-sm tracking-[-0.02em] text-black"
           >
             <ChevronLeft className="size-5" aria-hidden />
-            Kembali ke Beranda
+            {backLabel}
           </Link>
         </div>
       </div>

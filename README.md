@@ -60,7 +60,7 @@ Perintah lain:
 
 Slug marketplace yang ada: `chatgpt`, `claude`, `gemini`, `canva`, `capcut`, `spotify`.
 
-Navigasi desktop memakai label **Cek Plagiarisme**. **Daftar** adalah tombol sekunder dan **Masuk** adalah tombol utama. Bilah pengumuman WhatsApp hanya tampil di beranda.
+Menu utama: **Marketplace Account**, **Plagiarisme Checker**, **File Tools**, **Riwayat Pesanan**, dan **Ngampus Creator** (halaman UGC Campaign). **Daftar** adalah tombol sekunder dan **Masuk** adalah tombol utama. Bilah pengumuman WhatsApp hanya tampil di beranda.
 
 ## Struktur
 
