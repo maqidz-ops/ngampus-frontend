@@ -35,6 +35,7 @@ features/
   home/               Bagian beranda
   legal/              Halaman syarat dan privasi
   marketplace/        Katalog, pilihan produk, harga, dan checkout
+  payment/            Konfirmasi, QRIS, dan status pembayaran pratinjau
   orders/             Pencarian riwayat pesanan
   plagiarism/         Katalog layanan dan form pemeriksaan
   warranty/           Form dan daftar klaim garansi
@@ -53,11 +54,12 @@ Setiap fitur memakai `components/` untuk UI, `data/` untuk konten lokal, `types.
 
 - [Arsitektur dan aturan dependensi](docs/architecture.md)
 - [Peta integrasi backend](docs/backend-integration.md)
+- [Alur pembayaran frontend](docs/payment-flow.md)
 - [Alur kerja branch](docs/git-workflow.md)
 
 ## Status integrasi
 
-Backend produksi belum terhubung. Checkout belum membuat pembayaran, autentikasi umum belum aktif, dan riwayat belum membaca pesanan asli. Creator memakai sesi demo di `sessionStorage`; itu bukan autentikasi. Data contoh Creator dan garansi diberi nama `demo-*`. File Tools saat ini hanya menyediakan pemilihan file.
+Backend produksi belum terhubung. Checkout menyediakan alur pembayaran pratinjau (konfirmasi, QRIS, proses, selesai), tanpa transaksi nyata; autentikasi umum belum aktif, dan riwayat belum membaca pesanan asli. Creator memakai sesi demo di `sessionStorage`; itu bukan autentikasi. Data contoh Creator dan garansi diberi nama `demo-*`. File Tools saat ini hanya menyediakan pemilihan file.
 
 URL publik tetap: `/`, `/marketplace`, `/marketplace/[slug]`, `/cek-plagiarisme`, `/cek-plagiarisme/[slug]`, `/file-tools`, `/blog`, `/blog/[slug]`, `/riwayat-pesanan`, `/klaim-garansi`, `/daftar`, `/masuk`, `/lupa-password`, `/creator` beserta halaman turunannya, `/syarat-ketentuan`, dan `/kebijakan-privasi`. `/ugc-campaign` mengarah ke `/creator`.
 

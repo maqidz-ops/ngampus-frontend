@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 
-import { PlagiarismCheckout } from "@/features/plagiarism/components/plagiarism-checkout"
+import { Checkout } from "./checkout"
 import {
   getPlagiarismService,
   plagiarismServices,
@@ -34,5 +34,5 @@ export default async function PlagiarismServicePage({
   const service = getPlagiarismService(slug)
   if (!service) notFound()
 
-  return <PlagiarismCheckout service={service} />
+  return <Checkout service={service} />
 }

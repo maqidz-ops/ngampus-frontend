@@ -13,6 +13,8 @@ import {
   type PlagiarismService,
 } from "@/features/plagiarism/data/plagiarism"
 
+import type { OrderDraft } from "@/features/payment/types"
+
 function formatSize(bytes: number) {
   if (bytes < 1024 * 1024) return `${Math.max(bytes / 1024, 0.1).toFixed(1)} KB`
   return `${(bytes / (1024 * 1024)).toFixed(1)} MB`
@@ -105,10 +107,87 @@ function rupiah(value: number) {
 
 export function PlagiarismCheckout({
   service,
+  onCheckout,
 }: {
   service: PlagiarismService
+  onCheckout: (draft: OrderDraft) => Promise<void>
 }) {
   const uploadId = useId()
+  const formId = useId()
+  const inFlight = useRef(false)
+  const [busy, setBusy] = useState(false)
+  const [payError, setPayError] = useState("")
+  const [promoNote, setPromoNote] = useState("")
+  async function checkout() {
+    if (inFlight.current) return
+    setPayError("")
+    if (!file) {
+      setPayError("Pilih dokumen PDF terlebih dahulu.")
+      return
+    }
+    if (wordCount === undefined) {
+      setPayError("Tunggu pemeriksaan dokumen selesai.")
+      return
+    }
+    const maxWords =
+      service.slug === "cek-ai"
+        ? 25000
+        : service.slug === "turnitin"
+          ? 60000
+          : Infinity
+    if (wordCount && wordCount > maxWords) {
+      setPayError(
+        `Dokumen melebihi batas ${maxWords.toLocaleString("id-ID")} kata.`
+      )
+      return
+    }
+    const slug = service.slug
+    if (slug !== "turnitin" && slug !== "cek-ai" && slug !== "parafrase-manual")
+      return
+    if (
+      service.filters &&
+      checked["exclude-matches"] &&
+      (!Number.isFinite(Number(excludeAmount)) ||
+        Number(excludeAmount) <= 0 ||
+        (excludeUnit === "persentase" && Number(excludeAmount) > 100))
+    ) {
+      setPayError(
+        "Isi batas Exclude Small Matches yang valid (persentase 1–100)."
+      )
+      return
+    }
+    inFlight.current = true
+    setBusy(true)
+    try {
+      await onCheckout({
+        phone,
+        amount: service.price,
+        details: {
+          kind: "document",
+          slug,
+          title: service.title,
+          fileName: file.name,
+          fileSize: file.size,
+          filters: service.filters
+            ? plagiarismFilters
+                .filter((f) => checked[f.id])
+                .map((f) =>
+                  f.id === "exclude-matches"
+                    ? `${f.title}: ${excludeAmount} ${excludeUnit === "kata" ? "kata" : "%"}`
+                    : f.title
+                )
+            : [],
+        },
+      })
+    } catch (error) {
+      setPayError(
+        error instanceof Error ? error.message : "Pesanan tidak dapat dibuat."
+      )
+    } finally {
+      inFlight.current = false
+      setBusy(false)
+    }
+  }
   const [phone, setPhone] = useState("")
   const [promo, setPromo] = useState("")
   const [checked, setChecked] = useState<Record<string, boolean>>(() =>
@@ -150,7 +229,11 @@ export function PlagiarismCheckout({
         </div>
         <form
           className="flex flex-col gap-6 rounded-2xl border border-line p-5 md:p-6"
-          onSubmit={(event) => event.preventDefault()}
+          id={formId}
+          onSubmit={(event) => {
+            event.preventDefault()
+            void checkout()
+          }}
         >
           {notice && (
             <div className="flex gap-3 rounded-xl bg-sky-50 px-4 py-3 text-sky-800">
@@ -175,6 +258,7 @@ export function PlagiarismCheckout({
                 />
                 <input
                   type="tel"
+                  required
                   name="phone"
                   value={phone}
                   onChange={(event) => setPhone(event.target.value)}
@@ -202,6 +286,11 @@ export function PlagiarismCheckout({
                 />
                 <Button
                   type="button"
+                  onClick={() =>
+                    setPromoNote(
+                      "Kode promo belum tersedia pada pratinjau. Total tetap mengikuti harga layanan."
+                    )
+                  }
                   size="pill"
                   className="absolute top-1/2 right-1.5 h-9 -translate-y-1/2 px-3.5 text-sm"
                 >
@@ -210,6 +299,12 @@ export function PlagiarismCheckout({
               </span>
             </div>
           </div>
+
+          {promoNote && (
+            <p role="status" className="text-xs text-subtle">
+              {promoNote}
+            </p>
+          )}
 
           {service.filters && (
             <fieldset className="flex flex-col gap-3">
@@ -339,15 +434,39 @@ export function PlagiarismCheckout({
                 const next = event.target.files?.[0] ?? null
                 const request = wordRequest.current + 1
                 wordRequest.current = request
+                setPayError("")
+                if (
+                  next &&
+                  (!next.name.toLowerCase().endsWith(".pdf") ||
+                    next.size === 0 ||
+                    next.size > 10 * 1024 * 1024)
+                ) {
+                  setFile(null)
+                  setWordCount(null)
+                  setPayError(
+                    "Gunakan PDF yang tidak kosong dengan ukuran maksimal 10 MB."
+                  )
+                  event.target.value = ""
+                  return
+                }
                 setFile(next)
                 if (!next) {
                   setWordCount(null)
                   return
                 }
                 setWordCount(undefined)
-                countPdfWords(next).then((count) => {
-                  if (wordRequest.current === request) setWordCount(count)
-                })
+                countPdfWords(next)
+                  .then((count) => {
+                    if (wordRequest.current === request) setWordCount(count)
+                  })
+                  .catch(() => {
+                    if (wordRequest.current === request) {
+                      setWordCount(null)
+                      setPayError(
+                        "Jumlah kata tidak dapat dibaca. Pastikan dokumen memenuhi batas layanan."
+                      )
+                    }
+                  })
               }}
             />
           </div>
@@ -383,9 +502,24 @@ export function PlagiarismCheckout({
               <dd>{rupiah(service.price)}</dd>
             </div>
           </dl>
-          <Button type="button" size="pill-lg" className="w-full">
-            {plagiarismCheckout.payLabel}
+          <Button
+            type="submit"
+            form={formId}
+            disabled={busy || wordCount === undefined}
+            size="pill-lg"
+            className="w-full"
+          >
+            {busy ? "Menyiapkan pesanan…" : plagiarismCheckout.payLabel}
           </Button>
+          <p className="text-xs leading-5 text-subtle">
+            Pratinjau pembayaran. File belum diunggah; hanya nama dan ukuran
+            yang diteruskan.
+          </p>
+          {payError && (
+            <p role="alert" className="text-sm text-red-600">
+              {payError}
+            </p>
+          )}
         </aside>
       </section>
     </>

@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 
-import { MarketplaceCheckout } from "@/features/marketplace/components/marketplace-checkout"
+import { Checkout } from "./checkout"
 import { getMarketplaceCheckout } from "@/features/marketplace/services/catalog"
 import { marketplaceApps } from "@/features/marketplace/data/marketplace"
 
@@ -32,5 +32,5 @@ export default async function MarketplaceProductPage({
   const product = getMarketplaceCheckout(slug)
   if (!product) notFound()
 
-  return <MarketplaceCheckout product={product} />
+  return <Checkout product={product} />
 }

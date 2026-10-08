@@ -2,7 +2,7 @@
 
 import { Check, Phone, Star, UserRound } from "lucide-react"
 import Image from "next/image"
-import { useState } from "react"
+import { useRef, useState } from "react"
 
 import { Breadcrumb } from "@/components/layout/breadcrumb"
 import { Button } from "@/components/ui/button"
@@ -11,6 +11,7 @@ import {
   checkoutTypes,
 } from "@/features/marketplace/data/marketplace"
 import { type MarketplaceCheckout } from "@/features/marketplace/types"
+import type { OrderDraft } from "@/features/payment/types"
 import { cn } from "@/lib/utils"
 
 function rupiah(value: number) {
@@ -56,9 +57,13 @@ function Choice({
 
 export function MarketplaceCheckout({
   product,
+  onCheckout,
 }: {
   product: MarketplaceCheckout
+  onCheckout: (draft: OrderDraft) => Promise<void>
 }) {
+  const inFlight = useRef(false)
+  const [payBusy, setPayBusy] = useState(false)
   const offers = product.offers
   const [name, setName] = useState("")
   const [whatsapp, setWhatsapp] = useState("")
@@ -161,9 +166,37 @@ export function MarketplaceCheckout({
 
         <form
           className="flex flex-col gap-4"
-          onSubmit={(event) => {
+          onSubmit={async (event) => {
             event.preventDefault()
-            setPayNote("Pembayaran belum tersedia. Pesanan belum diproses.")
+            if (inFlight.current) return
+            inFlight.current = true
+            setPayBusy(true)
+            setPayNote("")
+            try {
+              await onCheckout({
+                phone: whatsapp,
+                amount: total,
+                details: {
+                  kind: "marketplace",
+                  slug: product.slug,
+                  title: product.name,
+                  customerName: name.trim(),
+                  plan: packageName,
+                  duration: selectedOffer?.duration ?? duration.label,
+                  warranty: selectedOffer?.warranty,
+                  accountType: offers ? undefined : accountType,
+                },
+              })
+            } catch (error) {
+              setPayNote(
+                error instanceof Error
+                  ? error.message
+                  : "Pesanan tidak dapat dibuat."
+              )
+            } finally {
+              inFlight.current = false
+              setPayBusy(false)
+            }
           }}
         >
           <section className="flex flex-col gap-4 rounded-2xl border border-line p-5">
@@ -305,9 +338,16 @@ export function MarketplaceCheckout({
                 <dd>{rupiah(total)}</dd>
               </div>
             </dl>
-            <Button type="submit" className="h-12 w-full rounded-3xl text-base">
-              Bayar Sekarang
+            <Button
+              type="submit"
+              disabled={payBusy}
+              className="h-12 w-full rounded-3xl text-base"
+            >
+              {payBusy ? "Menyiapkan pesanan…" : "Bayar Sekarang"}
             </Button>
+            <p className="text-center text-xs leading-5 text-subtle">
+              Pratinjau alur pembayaran. Belum ada transaksi nyata.
+            </p>
             {payNote && (
               <p className="text-center text-sm tracking-[-0.02em] text-subtle">
                 {payNote}

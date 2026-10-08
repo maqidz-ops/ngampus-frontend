@@ -43,6 +43,7 @@ function load(relative) {
       window: events,
       sessionStorage,
       Event,
+      crypto: globalThis.crypto,
     },
     { filename }
   )
@@ -101,4 +102,100 @@ sessionStorage.setItem("ngampus-creator-session", "invalid json")
 assert.equal(session.readCreatorSession(), null)
 console.log(
   `PASS: ${marketplaceApps.length} product models, warranty terms, blog queries, creator steps, and session lifecycle.`
+)
+
+const paymentRules = load("features/payment/services/order-rules.ts")
+const { previewGateway, simulateStatus } = load(
+  "features/payment/services/preview-gateway.ts"
+)
+assert.equal(paymentRules.normalizePhone("0812 3456 7890"), "6281234567890")
+assert.equal(paymentRules.normalizePhone("+62 812-3456-7890"), "6281234567890")
+assert.throws(() => paymentRules.normalizePhone("invalid"))
+const draft = {
+  phone: "081234567890",
+  amount: 40000,
+  details: {
+    kind: "marketplace",
+    slug: "chatgpt",
+    title: "ChatGPT",
+    customerName: "Preview Test",
+    plan: "Sharing",
+    duration: "14 Hari",
+  },
+}
+assert.throws(() => paymentRules.validateDraft({ ...draft, amount: -1 }))
+assert.equal(paymentRules.parseOrder("invalid json"), null)
+let paymentEvents = 0
+const { subscribeOrders } = load("features/payment/services/preview-gateway.ts")
+const stopPaymentEvents = subscribeOrders(() => paymentEvents++)
+const order = await previewGateway.createOrder(draft)
+assert.equal(order.status, "pending")
+assert.equal(order.phone, "6281234567890")
+assert.equal((await previewGateway.getOrder(order.id)).details.plan, "Sharing")
+assert.equal(
+  (await previewGateway.startPayment(order.id)).checkoutUrl,
+  `/pembayaran/${order.id}/qris`
+)
+assert.throws(() => simulateStatus(order.id, "completed"))
+simulateStatus(order.id, "processing")
+await assert.rejects(previewGateway.startPayment(order.id))
+simulateStatus(order.id, "completed")
+assert.equal((await previewGateway.getOrder(order.id)).status, "completed")
+assert.throws(() => simulateStatus(order.id, "pending"))
+assert.equal(paymentEvents, 3)
+stopPaymentEvents()
+for (const status of ["cancelled", "failed", "expired"]) {
+  const next = await previewGateway.createOrder(draft)
+  simulateStatus(next.id, status)
+  await assert.rejects(previewGateway.startPayment(next.id))
+  assert.throws(() => simulateStatus(next.id, "processing"))
+}
+const old = await previewGateway.createOrder(draft)
+const expired = { ...old, expiresAt: new Date(Date.now() - 1).toISOString() }
+sessionStorage.setItem(
+  `ngampus-payment-preview:${old.id}`,
+  JSON.stringify(expired)
+)
+assert.equal(paymentRules.effectiveStatus(expired), "expired")
+await assert.rejects(previewGateway.startPayment(old.id))
+assert.throws(() => simulateStatus(old.id, "processing"))
+for (const slug of ["turnitin", "cek-ai", "parafrase-manual"]) {
+  const d = {
+    phone: "081234567890",
+    amount: 7000,
+    details: {
+      kind: "document",
+      slug,
+      title: slug,
+      fileName: "Contoh.pdf",
+      fileSize: 1024,
+      filters:
+        slug === "turnitin"
+          ? ["Exclude Quotes", "Exclude Small Matches: 20 %"]
+          : [],
+    },
+  }
+  const result = await previewGateway.createOrder(d)
+  assert.equal(result.details.fileName, "Contoh.pdf")
+  assert.equal(result.details.filters.length, slug === "turnitin" ? 2 : 0)
+  assert.throws(() =>
+    paymentRules.validateDraft({
+      ...d,
+      details: { ...d.details, fileSize: 11 * 1024 * 1024 },
+    })
+  )
+  assert.throws(() =>
+    paymentRules.validateDraft({
+      ...d,
+      details: { ...d.details, fileName: "wrong.exe" },
+    })
+  )
+}
+assert.equal(await previewGateway.getOrder("missing"), null)
+assert.equal(
+  paymentRules.parseOrder(JSON.stringify({ ...order, mode: "live" })),
+  null
+)
+console.log(
+  "PASS: payment input validation, four checkout kinds, preview persistence, transitions, expiry, and terminal-state protection."
 )
