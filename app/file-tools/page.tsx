@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 
-import { FileTools } from "@/components/sections/file-tools"
+import { FileTools } from "@/features/file-tools/components/file-tools"
 
 export const metadata: Metadata = {
   title: "File Tools",

@@ -1,7 +1,7 @@
 import Link from "next/link"
 
 import { Button } from "@/components/ui/button"
-import { whatsappChannelUrl } from "@/lib/content/navigation"
+import { whatsappChannelUrl } from "@/config/navigation"
 
 export function AnnouncementBar() {
   return (

@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 
-import { MarketplaceCatalog } from "@/components/sections/marketplace-catalog"
+import { MarketplaceCatalog } from "@/features/marketplace/components/marketplace-catalog"
 
 export const metadata: Metadata = {
   title: "Marketplace",

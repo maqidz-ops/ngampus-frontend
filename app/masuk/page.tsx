@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 
-import { LoginForm } from "@/components/auth/auth-forms"
-import { AuthShell } from "@/components/auth/auth-shell"
+import { LoginForm } from "@/features/auth/components/auth-forms"
+import { AuthShell } from "@/components/layout/auth-shell"
 
 export const metadata: Metadata = {
   title: "Masuk",

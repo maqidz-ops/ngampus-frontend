@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 
-import { ForgotPasswordForm } from "@/components/auth/auth-forms"
-import { AuthShell } from "@/components/auth/auth-shell"
+import { ForgotPasswordForm } from "@/features/auth/components/auth-forms"
+import { AuthShell } from "@/components/layout/auth-shell"
 
 export const metadata: Metadata = {
   title: "Lupa Password",

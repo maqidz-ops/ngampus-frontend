@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 
-import { AuthShell } from "@/components/auth/auth-shell"
-import { WithdrawForm } from "@/components/creator/withdraw-form"
+import { AuthShell } from "@/components/layout/auth-shell"
+import { WithdrawForm } from "@/features/creator/components/withdraw-form"
 
 export const metadata: Metadata = {
   title: "Penarikan Saldo",

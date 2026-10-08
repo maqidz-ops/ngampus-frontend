@@ -1,10 +1,10 @@
 import { AnnouncementBar } from "@/components/layout/announcement-bar"
-import { Cta } from "@/components/sections/cta"
-import { Faq } from "@/components/sections/faq"
-import { Hero } from "@/components/sections/hero"
-import { Testimonials } from "@/components/sections/testimonials"
-import { ToolCategories } from "@/components/sections/tool-categories"
-import { WhyNgampus } from "@/components/sections/why-ngampus"
+import { Cta } from "@/features/home/components/cta"
+import { Faq } from "@/features/home/components/faq"
+import { Hero } from "@/features/home/components/hero"
+import { Testimonials } from "@/features/home/components/testimonials"
+import { ToolCategories } from "@/features/home/components/tool-categories"
+import { WhyNgampus } from "@/features/home/components/why-ngampus"
 
 export default function Home() {
   return (

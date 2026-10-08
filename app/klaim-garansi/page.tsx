@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 
-import { WarrantyClaims } from "@/components/sections/warranty-claims"
+import { WarrantyClaims } from "@/features/warranty/components/warranty-claims"
 
 export const metadata: Metadata = {
   title: "Pusat Klaim Garansi",

@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 
-import { AuthShell } from "@/components/auth/auth-shell"
-import { CreatorLoginForm } from "@/components/creator/creator-auth"
+import { AuthShell } from "@/components/layout/auth-shell"
+import { CreatorLoginForm } from "@/features/creator/components/creator-auth"
 
 export const metadata: Metadata = {
   title: "Masuk Creator",

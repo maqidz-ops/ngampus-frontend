@@ -1,11 +1,9 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 
-import { MarketplaceCheckout } from "@/components/sections/marketplace-checkout"
-import {
-  getMarketplaceCheckout,
-  marketplaceApps,
-} from "@/lib/content/marketplace"
+import { MarketplaceCheckout } from "@/features/marketplace/components/marketplace-checkout"
+import { getMarketplaceCheckout } from "@/features/marketplace/services/catalog"
+import { marketplaceApps } from "@/features/marketplace/data/marketplace"
 
 export function generateStaticParams() {
   return marketplaceApps.map((app) => ({ slug: app.slug }))

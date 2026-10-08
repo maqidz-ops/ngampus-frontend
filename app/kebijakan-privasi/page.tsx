@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 
-import { LegalPage } from "@/components/layout/legal-page"
-import { privacyIntro, privacySections } from "@/lib/content/legal"
+import { LegalPage } from "@/features/legal/components/legal-page"
+import { privacyIntro, privacySections } from "@/features/legal/data/legal"
 
 export const metadata: Metadata = {
   title: "Kebijakan Privasi",

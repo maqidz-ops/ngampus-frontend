@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 
-import { AuthShell } from "@/components/auth/auth-shell"
-import { SubmitContentForm } from "@/components/creator/submit-content-form"
+import { AuthShell } from "@/components/layout/auth-shell"
+import { SubmitContentForm } from "@/features/creator/components/submit-content-form"
 
 export const metadata: Metadata = {
   title: "Submit Konten",
@@ -19,9 +19,7 @@ export default async function CreatorSubmitPage({
   return (
     <AuthShell
       backHref={fromDashboard ? "/creator/dashboard" : "/creator"}
-      backLabel={
-        fromDashboard ? "Kembali ke Dashboard" : "Kembali ke Beranda"
-      }
+      backLabel={fromDashboard ? "Kembali ke Dashboard" : "Kembali ke Beranda"}
     >
       <SubmitContentForm />
     </AuthShell>

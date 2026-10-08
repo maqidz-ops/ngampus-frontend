@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 
-import { CreatorDashboard } from "@/components/creator/creator-dashboard"
+import { CreatorDashboard } from "@/features/creator/components/creator-dashboard"
 
 export const metadata: Metadata = {
   title: "Dashboard Creator",

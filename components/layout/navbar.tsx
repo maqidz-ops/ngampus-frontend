@@ -32,7 +32,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
-import { mainNav, type NavLink } from "@/lib/content/navigation"
+import { mainNav, type NavLink } from "@/config/navigation"
 
 const navItemClass =
   "h-auto rounded-md bg-transparent px-0 py-1 text-base font-normal whitespace-nowrap text-black hover:bg-transparent hover:text-primary focus:bg-transparent data-open:bg-transparent data-open:hover:bg-transparent data-open:focus:bg-transparent"

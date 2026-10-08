@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 
-import { LegalPage } from "@/components/layout/legal-page"
-import { termsIntro, termsSections } from "@/lib/content/legal"
+import { LegalPage } from "@/features/legal/components/legal-page"
+import { termsIntro, termsSections } from "@/features/legal/data/legal"
 
 export const metadata: Metadata = {
   title: "Syarat & Ketentuan",

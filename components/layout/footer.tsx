@@ -2,8 +2,8 @@ import { Mail, Phone } from "lucide-react"
 import Link from "next/link"
 
 import { Logo } from "@/components/layout/logo"
-import { footer } from "@/lib/content/home"
-import { footerColumns, type NavLink } from "@/lib/content/navigation"
+import { footer } from "@/config/site"
+import { footerColumns, type NavLink } from "@/config/navigation"
 
 function ContactIcon({ icon }: { icon: NavLink["icon"] }) {
   if (icon === "phone") {
@@ -79,7 +79,10 @@ export function Footer() {
                     const [name, domain] = link.label.split("@")
                     const email = link.icon === "email" && domain
                     return (
-                      <li key={i} className={email ? "w-0 min-w-full" : undefined}>
+                      <li
+                        key={i}
+                        className={email ? "w-0 min-w-full" : undefined}
+                      >
                         <Link
                           href={link.href}
                           target={external ? "_blank" : undefined}

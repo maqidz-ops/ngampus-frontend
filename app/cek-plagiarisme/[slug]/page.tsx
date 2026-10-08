@@ -1,11 +1,11 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 
-import { PlagiarismCheckout } from "@/components/sections/plagiarism-checkout"
+import { PlagiarismCheckout } from "@/features/plagiarism/components/plagiarism-checkout"
 import {
   getPlagiarismService,
   plagiarismServices,
-} from "@/lib/content/plagiarism"
+} from "@/features/plagiarism/data/plagiarism"
 
 export function generateStaticParams() {
   return plagiarismServices.map((service) => ({ slug: service.slug }))

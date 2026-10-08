@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 
-import { OrderHistory } from "@/components/sections/order-history"
+import { OrderHistory } from "@/features/orders/components/order-history"
 
 export const metadata: Metadata = {
   title: "Riwayat Pesanan",

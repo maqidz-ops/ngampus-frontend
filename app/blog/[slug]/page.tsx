@@ -3,7 +3,8 @@ import Link from "next/link"
 import { notFound } from "next/navigation"
 
 import { Breadcrumb } from "@/components/layout/breadcrumb"
-import { blogPosts, formatPostMeta, getPost } from "@/lib/content/blog"
+import { blogPosts, formatPostMeta } from "@/features/blog/data/blog"
+import { getPost } from "@/features/blog/services/posts"
 
 export function generateStaticParams() {
   return blogPosts.map((post) => ({ slug: post.slug }))

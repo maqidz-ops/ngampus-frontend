@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 
-import { PlagiarismServices } from "@/components/sections/plagiarism-services"
+import { PlagiarismServices } from "@/features/plagiarism/components/plagiarism-services"
 
 export const metadata: Metadata = {
   title: "Plagiarisme Checker",
