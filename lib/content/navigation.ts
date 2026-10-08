@@ -11,8 +11,8 @@ export type NavItem =
   | { type: "menu"; label: string; items: NavLink[] }
 
 export const mainNav: NavItem[] = [
-  { type: "link", label: "Marketplace Account", href: "/marketplace" },
-  { type: "link", label: "Plagiarisme Checker", href: "/cek-plagiarisme" },
+  { type: "link", label: "Marketplace", href: "/marketplace" },
+  { type: "link", label: "Plagiarisme", href: "/cek-plagiarisme" },
   {
     type: "menu",
     label: "File Tools",
@@ -64,8 +64,8 @@ export const footerColumns: { title: string; links: NavLink[] }[] = [
   {
     title: "LAYANAN",
     links: [
-      { label: "Marketplace Account", href: "/marketplace" },
-      { label: "Plagiarisme Checker", href: "/cek-plagiarisme" },
+      { label: "Marketplace", href: "/marketplace" },
+      { label: "Plagiarisme", href: "/cek-plagiarisme" },
       { label: "File Tools", href: "/file-tools" },
     ],
   },

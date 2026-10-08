@@ -1,23 +1,15 @@
 export const creatorJoinSteps = [
   {
-    title: "Daftarkan Dirimu",
-    body: "Isi data pendaftaran dengan lengkap dan pastikan informasi yang kamu masukkan valid, ya!",
+    title: "Daftar & Pahami Ketentuannya",
+    body: "Isi data pendaftaran dengan lengkap, lalu baca ketentuan dan panduan Ngampus Creator sebelum mulai",
   },
   {
-    title: "Pahami Ketentuannya",
-    body: "Sebelum mulai bikin konten, baca dulu ketentuan dan panduan Ngampus Creator yang tersedia di website",
+    title: "Buat & Submit Kontenmu",
+    body: "Buat konten sesuai ketentuan, upload di media sosialmu, lalu submit link konten melalui website Ngampus",
   },
   {
-    title: "Buat, Pantau, & Submit",
-    body: "Buat konten sesuai ketentuan, pantau performanya, lalu submit kontenmu melalui website Ngampus",
-  },
-  {
-    title: "Tunggu Verifikasi",
-    body: "Setelah disubmit, kontenmu akan kami cek dan verifikasi terlebih dahulu.",
-  },
-  {
-    title: "Dapatkan Reward & Withdraw",
-    body: "Kalau kontenmu sudah dinyatakan valid, reward akan masuk ke akunmu. Setelah itu, kamu bisa withdraw kapan pun kamu mau!",
+    title: "Tunggu Verifikasi & Dapatkan Reward",
+    body: "Kontenmu akan kami verifikasi. Kalau dinyatakan valid, reward akan masuk ke saldo akunmu dan bisa langsung kamu withdraw",
   },
 ]
 

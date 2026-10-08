@@ -48,8 +48,8 @@ function PlatformIcon({
   }
 
   return (
-    <svg viewBox="0 0 24 24" className="size-5" fill="currentColor" aria-hidden>
-      <path d="M14.7 3h3.1l-6.8 7.8L18.6 21h-3.2l-5-6.6L6.2 21H3.1l7.3-8.3L3.4 3h3.3l4.5 6z" />
+    <svg viewBox="0 0 24 24" className="size-6" fill="currentColor" aria-hidden>
+      <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.64 7.584H.47l8.6-9.835L0 1.154h7.594l5.243 6.932 6.064-6.933Zm-1.29 19.49h2.039L6.487 3.24H4.3l13.31 17.403Z" />
     </svg>
   )
 }
