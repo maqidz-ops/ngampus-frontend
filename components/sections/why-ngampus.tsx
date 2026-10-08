@@ -25,10 +25,7 @@ export function WhyNgampus() {
   return (
     <section className="bg-plum-700 text-white">
       <div className="mx-auto flex max-w-[1280px] flex-col gap-12 px-5 py-16 md:px-10 lg:gap-[85px] lg:p-20">
-        <SectionHeading
-          title={whyNgampus.title}
-          description={whyNgampus.description}
-        />
+        <SectionHeading title={whyNgampus.title} />
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {whyNgampus.items.map((item) => {
             const Icon = benefitIcons[item.title]

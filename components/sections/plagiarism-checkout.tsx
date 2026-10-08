@@ -57,7 +57,9 @@ async function inflatePdf(data: Uint8Array) {
   const attempts = [data.slice(2, Math.max(2, data.length - 4)), data]
   for (const input of attempts) {
     try {
-      const stream = new Blob([input])
+      const bytes = new ArrayBuffer(input.byteLength)
+      new Uint8Array(bytes).set(input)
+      const stream = new Blob([bytes])
         .stream()
         .pipeThrough(new DecompressionStream("deflate-raw"))
       return new TextDecoder("latin1").decode(
