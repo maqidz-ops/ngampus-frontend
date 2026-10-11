@@ -1,6 +1,9 @@
+import type { ParaphraseDetails } from "../paraphrase/types"
+
 export type PaymentStatus =
   "pending" | "processing" | "completed" | "expired" | "cancelled" | "failed"
 export type PaymentDetails =
+  | ParaphraseDetails
   | {
       kind: "marketplace"
       slug: string

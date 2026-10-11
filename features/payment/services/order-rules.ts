@@ -1,3 +1,5 @@
+import { calculateParaphrasePrice } from "../../paraphrase/services/pricing"
+import { validateParaphrase } from "../../paraphrase/services/validation"
 import type { OrderDraft, PaymentOrder, PaymentStatus } from "../types"
 
 export const PAYMENT_WINDOW_MS = 30 * 60 * 1000
@@ -46,6 +48,12 @@ export function validateDraft(draft: OrderDraft) {
       !d.filters.every((f) => typeof f === "string")
     )
       throw new Error("Filter dokumen tidak valid.")
+  } else if (d.kind === "paraphrase") {
+    validateParaphrase(d)
+    if (draft.amount !== calculateParaphrasePrice(d).total)
+      throw new Error(
+        "Harga parafrase tidak sesuai rincian pesanan. Buat ulang pesanan."
+      )
   } else throw new Error("Jenis pesanan tidak valid.")
 }
 

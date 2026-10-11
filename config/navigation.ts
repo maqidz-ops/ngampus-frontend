@@ -44,10 +44,9 @@ export const mainNav: NavItem[] = [
 export const whatsappChannelUrl =
   "https://whatsapp.com/channel/0029Vb8T6U2KGGGEX7gFIJ2i"
 
-export const tiktokUrl =
-  "https://www.tiktok.com/@ngampus.co.id?_r=1&_t=ZS-99ravhrtkKC"
+export const tiktokUrl = "https://www.tiktok.com/@ngampusofc"
 
-export const instagramUrl = "https://www.instagram.com/ngampusapp/"
+export const instagramUrl = "https://www.instagram.com/ngampusofc/"
 
 export const footerColumns: { title: string; links: NavLink[] }[] = [
   {
@@ -82,8 +81,8 @@ export const footerColumns: { title: string; links: NavLink[] }[] = [
         href: "mailto:cs@ngampus.co.id",
         icon: "email",
       },
-      { label: "@ngampus.co.id", href: tiktokUrl, icon: "tiktok" },
-      { label: "@ngampusapp", href: instagramUrl, icon: "instagram" },
+      { label: "@ngampusofc", href: tiktokUrl, icon: "tiktok" },
+      { label: "@ngampusofc", href: instagramUrl, icon: "instagram" },
     ],
   },
 ]

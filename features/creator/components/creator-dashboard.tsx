@@ -16,6 +16,8 @@ import { useEffect } from "react"
 import { CreatorHeader } from "@/features/creator/components/creator-header"
 import { Button } from "@/components/ui/button"
 import {
+  creatorDemoBalance,
+  MIN_WITHDRAWAL,
   creatorSubmissions,
   creatorWithdrawals,
 } from "@/features/creator/data/demo-dashboard"
@@ -83,9 +85,7 @@ export function CreatorDashboard() {
     return <div className="min-h-svh bg-white" />
   }
 
-  const saldo = creatorSubmissions
-    .filter((item) => item.status === "Diterima")
-    .reduce((sum, item) => sum + item.reward, 0)
+  const saldo = creatorDemoBalance
   const stats: { label: string; value: string; icon: LucideIcon }[] = [
     {
       label: "Total konten",
@@ -130,13 +130,18 @@ export function CreatorDashboard() {
                     {item.value}
                   </p>
                   {item.label === "Withdraw saldo" && (
-                    <Button
-                      asChild
-                      size="pill"
-                      className="mt-1 h-8 w-fit px-3 text-sm"
-                    >
-                      <Link href="/creator/withdraw">Withdraw</Link>
-                    </Button>
+                    <>
+                      <p className="text-xs text-subtle">
+                        Minimal withdraw {rupiah(MIN_WITHDRAWAL)}
+                      </p>
+                      <Button
+                        asChild
+                        size="pill"
+                        className="mt-1 h-8 w-fit px-3 text-sm"
+                      >
+                        <Link href="/creator/withdraw">Withdraw</Link>
+                      </Button>
+                    </>
                   )}
                 </div>
                 <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
@@ -155,7 +160,7 @@ export function CreatorDashboard() {
               href="/creator"
               className="text-sm tracking-[-0.02em] text-primary"
             >
-              Baca panduan Ngampus Creator
+              Pastikan baca panduan Ngampus Creator dulu ya!
             </Link>
           </div>
           <Button asChild size="pill">

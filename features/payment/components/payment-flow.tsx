@@ -10,7 +10,6 @@ import {
   FileText,
   LoaderCircle,
   QrCode,
-  ShieldCheck,
   ShoppingBag,
   XCircle,
 } from "lucide-react"
@@ -27,6 +26,9 @@ import {
   statusLabels,
 } from "../services/order-rules"
 import { previewGateway, simulateStatus } from "../services/preview-gateway"
+import { turnaroundOptions } from "@/features/paraphrase/options"
+import { PriceBreakdown } from "@/features/paraphrase/components/price-breakdown"
+import { calculateParaphrasePrice } from "@/features/paraphrase/services/pricing"
 import type { PaymentStatus } from "../types"
 
 export function PaymentFlow({
@@ -135,14 +137,6 @@ export function PaymentFlow({
         <ArrowLeft className="size-4" />
         {gateway ? "Kembali ke konfirmasi" : "Kembali ke layanan"}
       </Link>
-      <div className="mb-6 flex items-start gap-3 rounded-2xl border border-orange-200 bg-orange-50 px-4 py-3 text-sm leading-6 text-orange-900">
-        <ShieldCheck className="mt-0.5 size-5 shrink-0" />
-        <p>
-          <strong>Mode pratinjau.</strong> Tidak ada tagihan, pengiriman akun,
-          atau pemrosesan dokumen sungguhan. Data hanya disimpan sementara di
-          tab ini.
-        </p>
-      </div>
       <div className="mb-8">
         <p className="mb-2 text-xs font-semibold tracking-widest text-primary uppercase">
           {isMarket ? "Marketplace" : details.title}
@@ -244,6 +238,38 @@ export function PaymentFlow({
                     ["Nama file", details.fileName],
                     ["Ukuran file", formatFileSize(details.fileSize)],
                     ["Layanan", details.title],
+                    ...(details.kind === "paraphrase"
+                      ? [
+                          ["Nama", details.customerName],
+                          [
+                            "Jumlah kata",
+                            `${details.wordCount.toLocaleString("id-ID")} kata`,
+                          ],
+                          [
+                            "Bahasa",
+                            details.language === "id" ? "Indonesia" : "Inggris",
+                          ],
+                          ["Bidang", details.field || "Tidak ada"],
+                          ["Catatan", details.notes || "Tidak ada"],
+                          [
+                            "Estimasi pengerjaan",
+                            turnaroundOptions
+                              .filter((t) => t.id === details.turnaround)
+                              .map((t) => `${t.label} · ${t.duration}`)
+                              .join(""),
+                          ],
+                          ...details.reports.flatMap((r) => [
+                            [
+                              `Laporan ${r.type === "ai" ? "AI" : "Turnitin"}`,
+                              `${r.file.name} · ${formatFileSize(r.file.size)}`,
+                            ],
+                            [
+                              `Skor ${r.type === "ai" ? "AI" : "Turnitin"}`,
+                              `${r.initialScore}% → ${r.targetScore}%`,
+                            ],
+                          ]),
+                        ]
+                      : []),
                   ]
               )
                 .concat([["WhatsApp", `+${order.phone}`]])
@@ -256,7 +282,7 @@ export function PaymentFlow({
                   </div>
                 ))}
             </dl>
-            {!isMarket && details.filters.length > 0 && (
+            {details.kind === "document" && details.filters.length > 0 && (
               <div className="flex flex-wrap gap-2">
                 {details.filters.map((f) => (
                   <span
@@ -314,6 +340,19 @@ export function PaymentFlow({
                     : details.slug === "parafrase-manual"
                       ? "Tim sedang meninjau dan mengerjakan parafrase dokumenmu."
                       : "Hasil pengecekan akan tersedia di halaman ini setelah proses selesai."}
+                </p>
+              </div>
+            )}
+            {status === "processing" && details.kind === "paraphrase" && (
+              <div
+                role="status"
+                className="rounded-2xl border border-orange-200 bg-orange-50 p-5 text-sm leading-6"
+              >
+                Kalau sudah selesai, hasilnya akan langsung dikirim ke WhatsApp
+                kamu!
+                <p className="mt-2 text-xs text-subtle">
+                  Estimasi dihitung setelah pembayaran terverifikasi dan dokumen
+                  lengkap. Ini simulasi; belum ada pengiriman WhatsApp.
                 </p>
               </div>
             )}
@@ -393,6 +432,9 @@ export function PaymentFlow({
             </span>
             <h2 className="font-semibold">Ringkasan pembayaran</h2>
           </div>
+          {details.kind === "paraphrase" && (
+            <PriceBreakdown price={calculateParaphrasePrice(details)} />
+          )}
           <dl className="space-y-4 text-sm">
             <div className="flex justify-between gap-4">
               <dt className="text-subtle">Metode</dt>

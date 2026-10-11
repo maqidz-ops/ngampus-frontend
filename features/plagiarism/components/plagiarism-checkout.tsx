@@ -13,92 +13,13 @@ import {
   type PlagiarismService,
 } from "@/features/plagiarism/data/plagiarism"
 
+import { countPdfWords } from "@/features/plagiarism/services/pdf-word-count"
+
 import type { OrderDraft } from "@/features/payment/types"
 
 function formatSize(bytes: number) {
   if (bytes < 1024 * 1024) return `${Math.max(bytes / 1024, 0.1).toFixed(1)} KB`
   return `${(bytes / (1024 * 1024)).toFixed(1)} MB`
-}
-
-function pdfLiteralStrings(input: string) {
-  const parts: string[] = []
-  for (let index = 0; index < input.length; index += 1) {
-    if (input[index] !== "(") continue
-    let text = ""
-    let depth = 1
-    index += 1
-    while (index < input.length && depth > 0) {
-      const char = input[index]
-      if (char === "\\") {
-        const next = input[index + 1]
-        if (next === "n") text += "\n"
-        else if (next === "r") text += "\r"
-        else if (next === "t") text += "\t"
-        else if (next !== undefined) text += next
-        index += 2
-        continue
-      }
-      if (char === "(") depth += 1
-      if (char === ")") {
-        depth -= 1
-        if (depth === 0) break
-      }
-      text += char
-      index += 1
-    }
-    if (text.trim()) parts.push(text)
-  }
-  return parts
-}
-
-function countWords(text: string) {
-  return text.split(/[^\p{L}\p{N}]+/u).filter(Boolean).length
-}
-
-async function inflatePdf(data: Uint8Array) {
-  const attempts = [data.slice(2, Math.max(2, data.length - 4)), data]
-  for (const input of attempts) {
-    try {
-      const bytes = new ArrayBuffer(input.byteLength)
-      new Uint8Array(bytes).set(input)
-      const stream = new Blob([bytes])
-        .stream()
-        .pipeThrough(new DecompressionStream("deflate-raw"))
-      return new TextDecoder("latin1").decode(
-        await new Response(stream).arrayBuffer()
-      )
-    } catch {
-      continue
-    }
-  }
-  return ""
-}
-
-async function countPdfWords(file: File) {
-  const bytes = new Uint8Array(await file.arrayBuffer())
-  const source = new TextDecoder("latin1").decode(bytes)
-  const marker = /stream\r?\n/g
-  const chunks: string[] = []
-  let match = marker.exec(source)
-
-  while (match) {
-    const start = match.index + match[0].length
-    const end = source.indexOf("endstream", start)
-    if (end < 0) break
-    const header = source.slice(Math.max(0, match.index - 300), match.index)
-    let data = bytes.slice(start, end)
-    if (data.at(-1) === 0x0a) data = data.slice(0, -1)
-    if (data.at(-1) === 0x0d) data = data.slice(0, -1)
-    const decoded = /FlateDecode/.test(header)
-      ? await inflatePdf(data)
-      : new TextDecoder("latin1").decode(data)
-    const blocks = decoded.match(/BT[\s\S]*?ET/g) ?? []
-    chunks.push(...blocks.flatMap(pdfLiteralStrings))
-    match = marker.exec(source)
-  }
-
-  const total = countWords(chunks.join(" "))
-  return total > 0 ? total : null
 }
 
 function rupiah(value: number) {
@@ -118,6 +39,12 @@ export function PlagiarismCheckout({
   const [busy, setBusy] = useState(false)
   const [payError, setPayError] = useState("")
   const [promoNote, setPromoNote] = useState("")
+  const maxWords =
+    service.slug === "cek-ai"
+      ? 25000
+      : service.slug === "turnitin"
+        ? 60000
+        : Infinity
   async function checkout() {
     if (inFlight.current) return
     setPayError("")
@@ -129,12 +56,6 @@ export function PlagiarismCheckout({
       setPayError("Tunggu pemeriksaan dokumen selesai.")
       return
     }
-    const maxWords =
-      service.slug === "cek-ai"
-        ? 25000
-        : service.slug === "turnitin"
-          ? 60000
-          : Infinity
     if (wordCount && wordCount > maxWords) {
       setPayError(
         `Dokumen melebihi batas ${maxWords.toLocaleString("id-ID")} kata.`
@@ -411,7 +332,7 @@ export function PlagiarismCheckout({
                       {file.name}
                       <span className="mt-1 block">
                         {formatSize(file.size)}
-                        {" - "}
+                        {" · "}
                         {wordCount === undefined
                           ? "Menghitung kata..."
                           : wordCount === null
@@ -459,11 +380,13 @@ export function PlagiarismCheckout({
                   .then((count) => {
                     if (wordRequest.current === request) setWordCount(count)
                   })
-                  .catch(() => {
+                  .catch((error: unknown) => {
                     if (wordRequest.current === request) {
                       setWordCount(null)
                       setPayError(
-                        "Jumlah kata tidak dapat dibaca. Pastikan dokumen memenuhi batas layanan."
+                        error instanceof Error
+                          ? error.message
+                          : "PDF tidak dapat dibaca. Coba gunakan file PDF lain."
                       )
                     }
                   })

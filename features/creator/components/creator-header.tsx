@@ -2,6 +2,8 @@
 
 import { useCreatorSession } from "../hooks/use-creator-session"
 
+import { creatorDemoName } from "../data/demo-dashboard"
+
 import { UserRound } from "lucide-react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
@@ -34,7 +36,7 @@ export function CreatorHeader() {
               <span className="flex size-9 items-center justify-center rounded-full bg-primary/10 text-primary">
                 <UserRound className="size-4" aria-hidden />
               </span>
-              {session.name}
+              {creatorDemoName(session.name)}
             </Link>
             <Button
               type="button"

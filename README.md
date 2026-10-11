@@ -36,6 +36,7 @@ features/
   legal/              Halaman syarat dan privasi
   marketplace/        Katalog, pilihan produk, harga, dan checkout
   payment/            Konfirmasi, QRIS, dan status pembayaran pratinjau
+  paraphrase/         Form DOCX, laporan, target, dan kebutuhan parafrase
   orders/             Pencarian riwayat pesanan
   plagiarism/         Katalog layanan dan form pemeriksaan
   warranty/           Form dan daftar klaim garansi
@@ -55,6 +56,7 @@ Setiap fitur memakai `components/` untuk UI, `data/` untuk konten lokal, `types.
 - [Arsitektur dan aturan dependensi](docs/architecture.md)
 - [Peta integrasi backend](docs/backend-integration.md)
 - [Alur pembayaran frontend](docs/payment-flow.md)
+- [Form dan alur Parafrase](docs/paraphrase-flow.md)
 - [Alur kerja branch](docs/git-workflow.md)
 
 ## Status integrasi

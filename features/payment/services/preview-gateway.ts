@@ -25,6 +25,21 @@ export function readOrderSnapshot(id: string) {
     return null
   }
 }
+/** Only orders created in this browser tab; replace with an authorized API later. */
+export function listPreviewOrders(): PaymentOrder[] {
+  try {
+    const orders: PaymentOrder[] = []
+    for (let i = 0; i < sessionStorage.length; i += 1) {
+      const storageKey = sessionStorage.key(i)
+      if (!storageKey?.startsWith(`${EVENT}:`)) continue
+      const order = parseOrder(sessionStorage.getItem(storageKey))
+      if (order && storageKey === key(order.id)) orders.push(order)
+    }
+    return orders
+  } catch {
+    return []
+  }
+}
 export function subscribeOrders(listener: () => void) {
   window.addEventListener(EVENT, listener)
   window.addEventListener("storage", listener)

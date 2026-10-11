@@ -20,13 +20,14 @@ Halaman checkout meneruskan data melalui callback. Impor tipe payment dipakai se
 Pesanan tersimpan hanya di sesi tab, dapat dibuka ulang melalui URL yang sama dalam tab tersebut, dan hilang ketika sesi berakhir. URL hanya memuat ID acak; kontak serta rincian file tidak dimasukkan ke URL. File biner tidak disimpan atau diunggah. Metadata nama dan ukuran file ditampilkan pada ringkasan. Harga dihitung berdasarkan pilihan checkout saat ini; promo dan biaya gateway belum diterapkan.
 
 - Marketplace: produk, paket, durasi, garansi, pembeli, dan WhatsApp.
-- Dokumen: layanan, nama/ukuran PDF, WhatsApp, dan filter Turnitin yang dipilih. AI dan parafrase tidak menampilkan filter Turnitin.
+- Dokumen: layanan, nama/ukuran PDF, WhatsApp, dan filter Turnitin yang dipilih. AI tidak menampilkan filter Turnitin.
+- Parafrase: form khusus DOCX dan laporan PDF, skor/target, catatan, bahasa, bidang, kontak, dan estimasi pengerjaan. Lihat [alur Parafrase](paraphrase-flow.md).
 - QRIS berupa area placeholder yang tidak dapat dipakai membayar.
 - Tombol simulasi mengubah pending → processing → completed. Tidak ada pembayaran atau pengiriman sungguhan.
 - Tersedia simulasi gagal/kedaluwarsa dan pembatalan. Pending kedaluwarsa setelah 30 menit.
 - Hasil marketplace menunjukkan pratinjau pemberitahuan akses dikirim.
 - Hasil dokumen tidak menampilkan grafik skor; tombol unduh belum aktif sampai laporan asli tersedia. Hasil Turnitin/AI menyediakan CTA ke Parafrase Manual.
-- Input awal memeriksa nomor WhatsApp Indonesia, file PDF maksimal 10 MB, dan batas kata yang dapat dibaca. Parser kata lama bersifat perkiraan; validasi dokumen, halaman, dan jumlah kata yang otoritatif harus dilakukan server.
+- Input awal memeriksa nomor WhatsApp Indonesia, file PDF maksimal 10 MB, dan batas kata yang dapat dibaca. Penghitung kata menggunakan PDF.js secara lokal (PDF scan tanpa lapisan teks membutuhkan OCR); validasi dokumen, halaman, dan jumlah kata yang otoritatif harus dilakukan server.
 
 ## Integrasi backend berikutnya
 
