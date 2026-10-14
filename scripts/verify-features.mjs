@@ -63,14 +63,66 @@ for (const app of marketplaceApps) {
   const checkout = getMarketplaceCheckout(app.slug)
   assert.equal(checkout.slug, app.slug)
   assert.ok(checkout.packages.length > 0)
-  assert.equal(checkout.sections[1].title, "Garansi")
-  assert.equal(checkout.sections[2].items.length, 8)
+  const warranty = checkout.sections.find(
+    (section) => section.title === "Garansi"
+  )
+  const terms = checkout.sections.find(
+    (section) => section.title === "Syarat & Ketentuan"
+  )
+  assert.equal(warranty.items.length, app.slug === "canva" ? 3 : 2)
+  assert.equal(terms.items.length, 8)
+  assert.ok(terms.items.some(({ body }) => body.includes("× 80%")))
   assert.ok(
-    checkout.sections[2].items.some(({ body }) => body.includes("× 20%"))
+    checkout.sections.find((section) => section.title === "Catatan Penting")
+      ?.items.length
+  )
+  const cheapest = checkout.offers.reduce((best, offer) =>
+    offer.price < best.price ? offer : best
+  )
+  assert.equal(Number(app.price.replace(/\D/g, "")), cheapest.price)
+  assert.equal(Number(app.comparePrice.replace(/\D/g, "")), cheapest.official)
+  assert.equal(
+    new Set(checkout.offers.map((offer) => `${offer.plan}:${offer.duration}`))
+      .size,
+    checkout.offers.length
   )
   for (const offer of checkout.offers ?? [])
     assert.ok(Number.isFinite(offer.price))
 }
+// Key catalog revisions from Data Katalog.pdf; old variants must not remain selectable.
+assert.equal(getMarketplaceCheckout("canva").offers.length, 7)
+assert.equal(
+  getMarketplaceCheckout("canva").offers.find(
+    (offer) => offer.plan === "Member" && offer.duration === "2 Bulan"
+  ).price,
+  12000
+)
+assert.equal(
+  getMarketplaceCheckout("canva").offers.find(
+    (offer) => offer.plan === "Head/Owner"
+  ).price,
+  35000
+)
+assert.equal(getMarketplaceCheckout("chatgpt").offers.length, 4)
+assert.equal(
+  getMarketplaceCheckout("chatgpt").offers.find(
+    (offer) => offer.plan === "GO Private"
+  ).duration,
+  "3 Bulan"
+)
+assert.equal(
+  getMarketplaceCheckout("netflix").offers.find(
+    (offer) => offer.plan === "Semi Private"
+  ).price,
+  50000
+)
+assert.equal(getMarketplaceCheckout("disney-plus").offers.length, 2)
+assert.equal(
+  getMarketplaceCheckout("claude").offers.find(
+    (offer) => offer.plan === "Sharing 5U"
+  ).price,
+  150000
+)
 const blog = load("features/blog/services/posts.ts")
 const { blogPosts } = load("features/blog/data/blog.ts")
 assert.equal(blog.getPost("missing"), undefined)

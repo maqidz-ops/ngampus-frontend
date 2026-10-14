@@ -29,13 +29,6 @@ export const trustedBy = {
       height: 568,
     },
     {
-      id: "tidar",
-      name: "Universitas Tidar",
-      src: "/images/logo-tidar.png",
-      width: 1017,
-      height: 1024,
-    },
-    {
       id: "dinamika",
       name: "Universitas Dinamika",
       src: "/images/logo-dinamika.png",
@@ -211,5 +204,5 @@ export const faq = {
 export const cta = {
   title: ["Siap Bikin Kuliahmu", "Lebih Gampang?"],
   button: "Yuk, Coba Ngampus",
-  href: "/marketplace",
+  href: "#tools",
 }

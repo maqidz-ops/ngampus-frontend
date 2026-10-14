@@ -4,6 +4,7 @@ import Link from "next/link"
 
 import { Breadcrumb } from "@/components/layout/breadcrumb"
 import { Button } from "@/components/ui/button"
+import { PromoBanner } from "./promo-banner"
 import {
   formatStartPrice,
   plagiarismBenefits,
@@ -22,26 +23,8 @@ export function PlagiarismServices() {
         ]}
       />
       <section className="mx-auto flex w-full max-w-[1120px] flex-col gap-8 px-5 py-12 md:px-10 lg:py-16">
-        <div className="relative flex min-h-[220px] items-center overflow-hidden rounded-[24px] bg-plum-700 px-6 py-8 md:px-12 lg:min-h-[260px]">
-          <div className="relative z-10 flex max-w-[520px] flex-col gap-3">
-            <h1 className="text-[32px] leading-[1.15] font-medium tracking-[-0.02em] text-white md:text-[44px]">
-              {plagiarismHub.title[0]}
-              <br />
-              {plagiarismHub.title[1]}
-            </h1>
-            <p className="text-sm leading-6 tracking-[-0.02em] text-white/80 md:text-base">
-              {plagiarismHub.description}
-            </p>
-          </div>
-          <Image
-            src="/images/mascot-champion.png"
-            alt=""
-            width={660}
-            height={861}
-            sizes="280px"
-            className="pointer-events-none absolute right-3 bottom-1 hidden h-[248px] w-auto object-contain md:block"
-          />
-        </div>
+        <h1 className="sr-only">{plagiarismHub.title.join(" ")}</h1>
+        <PromoBanner />
         <div className="grid items-start gap-4 md:grid-cols-3">
           {plagiarismServices.map((service) => (
             <article

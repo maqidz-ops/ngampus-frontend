@@ -54,7 +54,29 @@ export function getMarketplaceCheckout(slug: string) {
             items: catalog.paragraphs.map((body) => ({ body })),
           }
         : descriptionSection(app.name, app.price),
-      warranty,
+      ...(catalog?.planDescriptions.length
+        ? [
+            {
+              title: "Penjelasan Plan",
+              items: catalog.planDescriptions.map((body) => ({ body })),
+            },
+          ]
+        : []),
+      ...(catalog?.notes.length
+        ? [
+            {
+              title: "Catatan Penting",
+              items: catalog.notes.map((body) => ({ body })),
+            },
+          ]
+        : []),
+      {
+        ...warranty,
+        items: [
+          ...warranty.items,
+          ...(catalog?.additionalWarranty ?? []).map((body) => ({ body })),
+        ],
+      },
       warrantyTerms,
     ],
   } satisfies MarketplaceCheckout
