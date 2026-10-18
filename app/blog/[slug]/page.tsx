@@ -48,9 +48,41 @@ export default async function BlogDetailPage({ params }: BlogDetailProps) {
         </header>
         <div className="h-56 rounded-2xl bg-surface" aria-hidden />
         <div className="flex flex-col gap-5 text-base leading-7 tracking-[-0.02em] text-black">
-          {post.paragraphs.map((paragraph) => (
-            <p key={paragraph}>{paragraph}</p>
-          ))}
+          {post.content
+            ? post.content.map((block, index) => {
+                if (block.type === "heading") {
+                  return (
+                    <h2
+                      key={index}
+                      className="mt-5 text-2xl leading-snug font-medium"
+                    >
+                      {block.text}
+                    </h2>
+                  )
+                }
+                if (block.type === "paragraph") {
+                  return <p key={index}>{block.text}</p>
+                }
+                if (
+                  block.type === "ordered-list" ||
+                  block.type === "unordered-list"
+                ) {
+                  const List = block.type === "ordered-list" ? "ol" : "ul"
+                  return (
+                    <List
+                      key={index}
+                      className={`${block.type === "ordered-list" ? "list-decimal" : "list-disc"} space-y-3 pl-6`}
+                    >
+                      {block.items.map((item) => (
+                        <li key={item}>{item}</li>
+                      ))}
+                    </List>
+                  )
+                }
+              })
+            : post.paragraphs.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
         </div>
         <Link
           href="/blog"

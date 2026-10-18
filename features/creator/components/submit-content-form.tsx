@@ -1,6 +1,7 @@
 "use client"
 
 import { ChevronDown } from "lucide-react"
+import Link from "next/link"
 import { useRef, useState } from "react"
 
 import { Button } from "@/components/ui/button"
@@ -28,14 +29,21 @@ export function SubmitContentForm() {
 
   if (submitted) {
     return (
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-4" role="status">
         <h1 className="text-2xl font-semibold tracking-[-0.02em]">
-          Submit Konten
+          Yeay, Kontenmu Berhasil Disubmit! 🎉
         </h1>
         <p className="text-base leading-6 tracking-[-0.02em] text-black/70">
-          Konten kamu sudah masuk antrean verifikasi. Tim Ngampus akan cek link,
-          views, dan screenshot yang kamu kirim.
+          Tinggal tunggu proses verifikasi dari tim Ngampus, ya. Pengecekan
+          membutuhkan waktu maksimal 1 minggu.
         </p>
+        <p className="text-base leading-6 tracking-[-0.02em] text-black/70">
+          Kalau submission-mu valid, reward akan langsung masuk ke saldo akunmu
+          dan statusnya bisa kamu pantau lewat dashboard.
+        </p>
+        <Button asChild size="pill" className="mt-2 w-full">
+          <Link href="/creator/dashboard">Oke, Sip!</Link>
+        </Button>
       </div>
     )
   }

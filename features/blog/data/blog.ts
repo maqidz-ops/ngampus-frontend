@@ -1,3 +1,5 @@
+import { kenanPosts } from "./kenan-posts"
+
 export const blogCategories = [
   { id: "semua", label: "Semua" },
   { id: "ai-detector", label: "AI Detector" },
@@ -8,6 +10,10 @@ export const blogCategories = [
 
 export type BlogCategory = (typeof blogCategories)[number]["id"]
 
+export type BlogContentBlock =
+  | { type: "heading" | "paragraph"; text: string }
+  | { type: "unordered-list" | "ordered-list"; items: string[] }
+
 export type BlogPost = {
   slug: string
   title: string
@@ -15,11 +21,13 @@ export type BlogPost = {
   date: string
   category: Exclude<BlogCategory, "semua">
   paragraphs: string[]
+  content?: BlogContentBlock[]
 }
 
 export const postsPerPage = 3
 
 export const blogPosts: BlogPost[] = [
+  ...kenanPosts,
   {
     slug: "cek-plagiasi-sebelum-kumpulin-skripsi",
     title: "Cek plagiasi sebelum kumpulin skripsi",
