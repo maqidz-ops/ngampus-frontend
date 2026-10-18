@@ -20,6 +20,7 @@ export type BlogPost = {
   excerpt: string
   date: string
   category: Exclude<BlogCategory, "semua">
+  thumbnail?: string
   paragraphs: string[]
   content?: BlogContentBlock[]
 }

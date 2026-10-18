@@ -3,6 +3,7 @@ import type { BlogPost } from "./blog"
 export const kenanPosts: BlogPost[] = [
   {
     slug: "cara-cek-plagiarisme-skripsi-sebelum-dikirim-ke-dosen",
+    thumbnail: "/images/blog/cek-plagiarisme-skripsi.png",
     title:
       "Jangan Panik Dulu! Ini Cara Cek Plagiarisme Skripsi Sebelum Dikirim ke Dosen",
     excerpt:
@@ -188,6 +189,7 @@ export const kenanPosts: BlogPost[] = [
   },
   {
     slug: "10-cara-menggunakan-ai-untuk-tugas-kuliah",
+    thumbnail: "/images/blog/ai-untuk-tugas-kuliah.png",
     title:
       "10 Cara Menggunakan AI untuk Membantu Tugas Kuliah Tanpa Jadi Ketergantungan",
     excerpt:
@@ -350,6 +352,7 @@ export const kenanPosts: BlogPost[] = [
   },
   {
     slug: "10-kesalahan-saat-mengumpulkan-tugas",
+    thumbnail: "/images/blog/kesalahan-mengumpulkan-tugas.png",
     title:
       "10 Kesalahan yang Sering Dilakukan Mahasiswa Saat Mengumpulkan Tugas",
     excerpt:

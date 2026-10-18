@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import Link from "next/link"
+import Image from "next/image"
 import { notFound } from "next/navigation"
 
 import { Breadcrumb } from "@/components/layout/breadcrumb"
@@ -46,7 +47,19 @@ export default async function BlogDetailPage({ params }: BlogDetailProps) {
             {post.title}
           </h1>
         </header>
-        <div className="h-56 rounded-2xl bg-surface" aria-hidden />
+        {post.thumbnail ? (
+          <Image
+            src={post.thumbnail}
+            alt={post.title}
+            width={5760}
+            height={3240}
+            sizes="(max-width: 767px) 100vw, 680px"
+            preload
+            className="aspect-video h-auto w-full rounded-2xl"
+          />
+        ) : (
+          <div className="h-56 rounded-2xl bg-surface" aria-hidden />
+        )}
         <div className="flex flex-col gap-5 text-base leading-7 tracking-[-0.02em] text-black">
           {post.content
             ? post.content.map((block, index) => {

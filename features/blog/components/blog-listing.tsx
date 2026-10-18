@@ -1,5 +1,6 @@
 import { ArrowLeft, ArrowRight } from "lucide-react"
 import Link from "next/link"
+import Image from "next/image"
 
 import { Breadcrumb } from "@/components/layout/breadcrumb"
 import { SectionHeading } from "@/components/shared/section-heading"
@@ -96,10 +97,21 @@ export async function BlogListing({ searchParams }: BlogPageProps) {
                 href={`/blog/${post.slug}`}
                 className="flex flex-col gap-4"
               >
-                <div
-                  className="h-48 w-full rounded-2xl bg-surface"
-                  aria-hidden
-                />
+                {post.thumbnail ? (
+                  <Image
+                    src={post.thumbnail}
+                    alt=""
+                    width={5760}
+                    height={3240}
+                    sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 400px"
+                    className="aspect-video h-auto w-full rounded-2xl"
+                  />
+                ) : (
+                  <div
+                    className="h-48 w-full rounded-2xl bg-surface"
+                    aria-hidden
+                  />
+                )}
                 <div className="flex flex-col gap-1 px-1">
                   <h3 className="text-lg font-semibold tracking-[-0.02em] text-black">
                     {post.title}
