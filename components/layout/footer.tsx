@@ -58,11 +58,6 @@ export function Footer() {
               <p className="tracking-[-0.02em] text-black">
                 {footer.description}
               </p>
-              <p className="text-sm tracking-[-0.02em] text-black/70">
-                Copyright 2026 © Ngampus.
-                <br />
-                All Rights Reserved
-              </p>
             </div>
           </div>
 
@@ -72,7 +67,9 @@ export function Footer() {
                 key={column.title}
                 className="flex w-max min-w-[136px] flex-col gap-4"
               >
-                <p className="tracking-[-0.02em] text-black">{column.title}</p>
+                <p className="font-semibold tracking-[-0.02em] text-black">
+                  {column.title}
+                </p>
                 <ul className="flex flex-col gap-4">
                   {column.links.map((link, i) => {
                     const external = link.href.startsWith("http")
@@ -107,6 +104,9 @@ export function Footer() {
             ))}
           </div>
         </div>
+        <p className="mt-10 border-t border-line pt-6 text-center text-sm tracking-[-0.02em] text-black/70">
+          Copyright 2026 © Ngampus. All Rights Reserved
+        </p>
       </div>
     </footer>
   )
