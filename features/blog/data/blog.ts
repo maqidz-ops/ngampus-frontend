@@ -2,10 +2,11 @@ import { kenanPosts } from "./kenan-posts"
 
 export const blogCategories = [
   { id: "semua", label: "Semua" },
-  { id: "ai-detector", label: "AI Detector" },
-  { id: "drillbit", label: "DrillBit" },
-  { id: "plagiasi-turnitin", label: "Plagiasi Turnitin" },
   { id: "tips-mahasiswa", label: "Tips Mahasiswa" },
+  { id: "ai-teknologi", label: "AI & Teknologi" },
+  { id: "akademik", label: "Akademik" },
+  { id: "tools-tutorial", label: "Tools & Tutorial" },
+  { id: "info-ngampus", label: "Info Ngampus" },
 ] as const
 
 export type BlogCategory = (typeof blogCategories)[number]["id"]
@@ -34,7 +35,7 @@ export const blogPosts: BlogPost[] = [
     title: "Cek plagiasi sebelum kumpulin skripsi",
     excerpt: "Kirim file tugas, skripsi, atau artikel.",
     date: "12 September 2026",
-    category: "plagiasi-turnitin",
+    category: "akademik",
     paragraphs: [
       "Skripsi yang sudah beres tetap perlu dicek sebelum dikumpulin. Similarity yang tinggi sering datang dari kutipan yang belum diparafrase, daftar pustaka yang ikut terhitung, atau bagian metode yang mirip dengan jurnal acuan.",
       "Unggah dokumen di Ngampus, tunggu hasilnya beberapa menit, lalu baca laporan PDF-nya. Persentase similarity dan sumber yang terdeteksi membantu kamu merapikan bagian yang memang perlu diubah.",
@@ -46,7 +47,7 @@ export const blogPosts: BlogPost[] = [
     title: "Beda cek plagiasi dan deteksi AI",
     excerpt: "Dua pemeriksaan, dua hasil yang berbeda.",
     date: "8 September 2026",
-    category: "ai-detector",
+    category: "ai-teknologi",
     paragraphs: [
       "Cek plagiasi membandingkan tulisanmu dengan sumber yang sudah ada. Deteksi AI memperkirakan apakah sebuah teks terlihat seperti hasil generator.",
       "Keduanya tidak saling menggantikan. Tulisan bisa lolos plagiasi tetapi tetap terdeteksi sebagai teks AI, atau sebaliknya.",
@@ -58,7 +59,7 @@ export const blogPosts: BlogPost[] = [
     title: "Cara baca laporan similarity",
     excerpt: "Persentase saja tidak cukup. Lihat sumbernya.",
     date: "2 September 2026",
-    category: "plagiasi-turnitin",
+    category: "akademik",
     paragraphs: [
       "Laporan PDF menampilkan persentase similarity dan daftar sumber yang terdeteksi. Angka tinggi belum tentu berarti menyalin, kalau sebagian besar berasal dari daftar pustaka atau kutipan yang sudah ditandai.",
       "Buka setiap sorotan. Ubah bagian yang memang mirip dengan sumber, dan biarkan kutipan yang sudah kamu tandai dengan benar.",
@@ -70,7 +71,7 @@ export const blogPosts: BlogPost[] = [
     title: "File PDF kegedean sebelum dikumpulin",
     excerpt: "Kompres dulu, baru unggah ke kampus.",
     date: "28 Agustus 2026",
-    category: "tips-mahasiswa",
+    category: "tools-tutorial",
     paragraphs: [
       "Portal kampus sering menolak file di atas batas ukuran. Gambar di dalam skripsi biasanya penyebabnya.",
       "Kompres PDF di file tools Ngampus tanpa mengubah isi halaman. Setelah ukurannya muat, baru unggah.",
@@ -94,7 +95,7 @@ export const blogPosts: BlogPost[] = [
     title: "Dokumenmu tidak masuk repository",
     excerpt: "Cek di Ngampus tidak mengganggu cek kampus.",
     date: "15 Agustus 2026",
-    category: "plagiasi-turnitin",
+    category: "info-ngampus",
     paragraphs: [
       "Banyak mahasiswa takut cek plagiasi di luar kampus karena dokumennya bisa masuk repository dan terdeteksi sebagai sumber dirinya sendiri.",
       "Di Ngampus, file tidak disimpan permanen. Data dihapus setelah proses selesai, dan dokumen tidak masuk repository yang dipakai kampus.",
@@ -106,7 +107,7 @@ export const blogPosts: BlogPost[] = [
     title: "Beda laporan DrillBit dengan cek biasa",
     excerpt: "Beberapa kampus memakai DrillBit, bukan Turnitin.",
     date: "9 Agustus 2026",
-    category: "drillbit",
+    category: "tools-tutorial",
     paragraphs: [
       "DrillBit membandingkan naskah dengan sumber yang dia indeks, lalu menandai bagian yang mirip. Tampilannya beda dari laporan Turnitin, tapi yang perlu kamu baca tetap sama: persentase dan sumbernya.",
       "Angka tinggi sering datang dari kutipan, daftar pustaka, atau metode yang memang mirip jurnal acuan. Buka sorotannya sebelum mengubah seluruh bab.",

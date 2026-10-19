@@ -5,7 +5,7 @@ export const hero = {
 }
 
 export const trustedBy = {
-  title: "TELAH DIPERCAYA 50.000+ MAHASISWA",
+  title: "TELAH DIPERCAYA OLEH MAHASISWA DI BERBAGAI KAMPUS",
   logos: [
     {
       id: "uns",

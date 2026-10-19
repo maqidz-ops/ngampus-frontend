@@ -9,7 +9,7 @@ export const kenanPosts: BlogPost[] = [
     excerpt:
       "Pahami hasil similarity, perbaiki sitasi dan parafrase, lalu cek kembali skripsimu dengan tenang sebelum dikirim ke dosen.",
     date: "18 Oktober 2026",
-    category: "plagiasi-turnitin",
+    category: "akademik",
     paragraphs: [],
     content: [
       {
@@ -195,7 +195,7 @@ export const kenanPosts: BlogPost[] = [
     excerpt:
       "Gunakan AI sebagai teman belajar untuk mencari ide, memahami materi, dan merapikan tugas sambil tetap berpikir mandiri.",
     date: "18 Oktober 2026",
-    category: "tips-mahasiswa",
+    category: "ai-teknologi",
     paragraphs: [],
     content: [
       {
