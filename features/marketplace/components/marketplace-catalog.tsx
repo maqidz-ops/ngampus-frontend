@@ -6,6 +6,7 @@ import Link from "next/link"
 import { useMemo, useState } from "react"
 
 import { Breadcrumb } from "@/components/layout/breadcrumb"
+import { PromoCarousel } from "@/components/shared/promo-carousel"
 import { Button } from "@/components/ui/button"
 import {
   marketplaceApps,
@@ -16,6 +17,21 @@ import {
   type MarketplaceCategory,
 } from "@/features/marketplace/data/marketplace"
 import { cn } from "@/lib/utils"
+
+const promoSlides = [
+  {
+    image: "/images/marketplace/banner-premium.png",
+    href: "#marketplace-search",
+    label: "Akun Premium",
+    alt: "Dapatkan akun premium, harga mahasiswa. Mulai dari Rp10.000",
+  },
+  {
+    image: "/images/marketplace/banner-gpt-go.png",
+    href: "/marketplace/chatgpt",
+    label: "GPT Go",
+    alt: "Dapatkan akun GPT Go, harga terjangkau! Mulai dari Rp20.000",
+  },
+]
 
 export function MarketplaceCatalog() {
   const [query, setQuery] = useState("")
@@ -39,27 +55,8 @@ export function MarketplaceCatalog() {
         items={[{ label: "Beranda", href: "/" }, { label: "Marketplace" }]}
       />
       <section className="mx-auto flex w-full max-w-[1120px] flex-col gap-6 px-5 py-12 md:px-10 lg:py-16">
-        <div className="relative flex min-h-[220px] items-center overflow-hidden rounded-[24px] bg-plum-700 px-6 py-8 md:px-12 lg:min-h-[260px]">
-          <div className="relative z-10 flex max-w-[520px] flex-col gap-3">
-            <h1 className="text-[32px] leading-[1.15] font-medium tracking-[-0.02em] text-white md:text-[44px]">
-              Akun premium,
-              <br />
-              harga mahasiswa
-            </h1>
-            <p className="text-sm leading-6 tracking-[-0.02em] text-white/80 md:text-base">
-              Pilih akun AI, desain, atau hiburan. Bayar, lalu detail akun
-              dikirim ke kamu.
-            </p>
-          </div>
-          <Image
-            src="/images/mascot-happy.png"
-            alt=""
-            width={593}
-            height={880}
-            sizes="240px"
-            className="pointer-events-none absolute -right-2 -bottom-6 hidden h-[300px] w-auto object-contain md:block"
-          />
-        </div>
+        <h1 className="sr-only">Marketplace: akun premium, harga mahasiswa</h1>
+        <PromoCarousel slides={promoSlides} label="Promo marketplace Ngampus" />
         <label className="sr-only" htmlFor="marketplace-search">
           Cari aplikasi
         </label>
